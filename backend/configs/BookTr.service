@@ -1,0 +1,12 @@
+[Unit]
+Description=FunBoard
+Documentation=https://github.com/aceberg/FunBoard
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/usr/bin/booktr -d /etc/FunBoard/
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
