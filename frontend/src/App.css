@@ -1,9 +1,8 @@
 @import "tailwindcss";
 
-/* :root {
-  --my-bg: #2cdf14;
-} */
-
-.my-bg {
-  @apply bg-cyan-900
+@theme {
+  --color-bg1: var(--color-slate-950);
+  --color-bg2: var(--color-slate-900);
+  --color-text1: var(--color-slate-100);
+  --color-text2: var(--color-slate-300);
 }

@@ -1,11 +1,14 @@
 import './App.css'
+import Header from './pages/Header'
+import Main from './pages/Main'
 
 function App() {
 
   return (
     <>
-      <div class='my-bg h-auto'>
-        <p>New app</p>
+      <div class='flex flex-col h-screen'>
+        <Header></Header>
+        <Main></Main>
       </div>
     </>
   )
