@@ -5,7 +5,7 @@ function Main() {
 
   return (
     <>
-      <div class="p-1 flex-1 overflow-auto">
+      <div class="p-1 flex-1 h-full overflow-x-hidden">
         <Table></Table>
       </div>
     </>
