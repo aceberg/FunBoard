@@ -4,13 +4,30 @@ package models
 type Conf struct {
 	Host     string
 	Port     string
-	Theme    string
-	Color    string
 	DirPath  string
 	ConfPath string
-	NodePath string
-	LtrPath  string
-	LtrKey   string
-	LangFrom string
-	LangTo   string
+	DBPath   string
+}
+
+// Board - one board
+type Board struct {
+	ID      uint `gorm:"primaryKey"`
+	Name    string
+	Columns []Column `gorm:"foreignKey:BoardID"`
+}
+
+// Column - one column of the Board
+type Column struct {
+	ID      uint `gorm:"primaryKey"`
+	Name    string
+	Fold    bool
+	BoardID uint
+	Cards   []Card `gorm:"foreignKey:ColumnID"`
+}
+
+// Card - one card
+type Card struct {
+	ID       uint `gorm:"primaryKey"`
+	Name     string
+	ColumnID uint
 }

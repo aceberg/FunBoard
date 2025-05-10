@@ -6,13 +6,16 @@ function Column(_props: any) {
 
   const [fold, setFold] = createSignal<boolean>(_props.col.Fold);
 
-  const [backList, backs] = useDragAndDrop<HTMLDivElement, string>(
+  const [backList, backs] = useDragAndDrop<HTMLDivElement, HTMLDivElement>(
     _props.col.Cards,
     { 
       group: "todoList",
       onTransfer: () => {
         console.log("Tr "+_props.col.Name+": "+_props.col.Cards.join(", "));
         // api call to save
+      },
+      onSort: () => {
+        console.log("Sort "+_props.col.Name+": "+_props.col.Cards.join(", "));
       },
     });
 

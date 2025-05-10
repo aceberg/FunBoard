@@ -8,8 +8,10 @@ import (
 
 	"github.com/gin-gonic/gin"
 
+	"github.com/aceberg/FunBoard/internal/api"
 	"github.com/aceberg/FunBoard/internal/check"
 	"github.com/aceberg/FunBoard/internal/conf"
+	"github.com/aceberg/FunBoard/internal/gdb"
 	"github.com/aceberg/FunBoard/internal/models"
 )
 
@@ -26,7 +28,7 @@ var (
 )
 
 // Gui - start web server
-func Gui(dirPath, nodePath string) {
+func Gui(dirPath string) {
 
 	confPath := dirPath + "/config.yaml"
 	check.Path(confPath)
@@ -34,9 +36,10 @@ func Gui(dirPath, nodePath string) {
 
 	appConfig.DirPath = dirPath
 	appConfig.ConfPath = confPath
-	if nodePath != "" {
-		appConfig.NodePath = nodePath
-	}
+	appConfig.DBPath = dirPath + "/sqlite.db"
+	check.Path(appConfig.DBPath)
+
+	gdb.Start(appConfig.DBPath)
 
 	log.Println("INFO: starting web gui with config", appConfig.ConfPath)
 
@@ -55,10 +58,7 @@ func Gui(dirPath, nodePath string) {
 	router.GET("/", indexHandler) // index.go
 	router.StaticFS("/fs", http.FS(assetsFS))
 
-	router.GET("/api", apiHandler)        // api.go
-	router.GET("/api/conf", apiGetConfig) // api.go
-
-	router.POST("/api/conf", apiSaveConf) // api.go
+	api.Routes(router, &appConfig)
 
 	err := router.Run(address)
 	check.IfError(err)

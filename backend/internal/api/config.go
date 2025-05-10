@@ -1,4 +1,4 @@
-package web
+package api
 
 import (
 	"encoding/json"
@@ -20,12 +20,12 @@ func apiHandler(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, msg)
 }
 
-func apiGetConfig(c *gin.Context) {
+func getConfig(c *gin.Context) {
 
 	c.IndentedJSON(http.StatusOK, appConfig)
 }
 
-func apiSaveConf(c *gin.Context) {
+func saveConf(c *gin.Context) {
 	var config models.Conf
 
 	str := c.PostForm("conf")
@@ -35,13 +35,6 @@ func apiSaveConf(c *gin.Context) {
 	// log.Println("INFO: new config", config)
 	appConfig.Host = config.Host
 	appConfig.Port = config.Port
-	appConfig.Theme = config.Theme
-	appConfig.Color = config.Color
-	appConfig.NodePath = config.NodePath
-	appConfig.LangFrom = config.LangFrom
-	appConfig.LangTo = config.LangTo
-	appConfig.LtrPath = config.LtrPath
-	appConfig.LtrKey = config.LtrKey
 
 	conf.Write(appConfig)
 
