@@ -14,7 +14,7 @@ func getBoardByID(c *gin.Context) {
 	idStr := c.Param("id")
 	log.Println("Getting Board", idStr)
 
-	board := gdb.GetBoardByID(appConfig.DBPath)
+	board := gdb.BoardGetByID()
 
 	c.IndentedJSON(http.StatusOK, board)
 }

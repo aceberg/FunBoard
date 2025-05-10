@@ -1,11 +1,10 @@
 import { createStore } from "solid-js/store";
-import { apiGetBoardByID } from "./api";
+import { apiBoardGetByID } from "./api";
 
 export interface Card {
     ID: number;
     Name: string;
-    // Color: string;
-    // Font: string;
+    ColumnID: number;
 };
 
 export interface Column {
@@ -21,41 +20,4 @@ export interface Board {
     Columns: Column[];
 };
 
-export const myBoard:Board = {
-    ID: 1,
-    Name: "My temp board",
-    Columns: [
-        {
-            ID: 0,
-            Name: "Backlog",
-            Cards: [],
-            Fold: false,
-        },
-        {
-            ID: 1,
-            Name: "Projects",
-            Cards: [],
-            Fold: false,
-        },
-        {
-            ID: 2,
-            Name: "Now",
-            Cards: [],
-            Fold: false,
-        },
-        {
-            ID: 3,
-            Name: "Done",
-            Cards: [],
-            Fold: false,
-        },
-        {
-            ID: 4,
-            Name: "Other",
-            Cards: [],
-            Fold: false,
-        },
-    ],
-}
-
-export const [curBoard, setCurBoard] = createStore<Board>(await apiGetBoardByID("1"));
+export const [curBoard, setCurBoard] = createStore<Board>(await apiBoardGetByID(1));

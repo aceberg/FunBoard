@@ -1,6 +1,8 @@
 import { createSignal, For } from "solid-js"
 import Card from "./Card"
 import { useDragAndDrop } from "@formkit/drag-and-drop/solid";
+import { apiBoardGetByID, apiCardEdit } from "../../utils/api";
+import { curBoard, setCurBoard } from "../../utils/exports";
 
 function Column(_props: any) {
 
@@ -10,13 +12,23 @@ function Column(_props: any) {
     _props.col.Cards,
     { 
       group: "todoList",
-      onTransfer: () => {
-        console.log("Tr "+_props.col.Name+": "+_props.col.Cards.join(", "));
-        // api call to save
+      onTransfer: async () => {
+        
+        for (let i=0; i< _props.col.Cards.length; i++) {
+          if (_props.col.Cards[i].ColumnID !== _props.col.ID) {
+          
+            let card = { ..._props.col.Cards[i]};
+            card.ColumnID = _props.col.ID;
+
+            apiCardEdit(card);
+            setCurBoard(await apiBoardGetByID(curBoard.ID));
+          }
+        }
+
       },
-      onSort: () => {
-        console.log("Sort "+_props.col.Name+": "+_props.col.Cards.join(", "));
-      },
+      // onSort: () => {
+      //   console.log("Sort "+_props.col.Name+": "+_props.col.Cards.join(", "));
+      // },
     });
 
   const handleFold = () => {
