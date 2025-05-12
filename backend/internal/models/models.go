@@ -27,7 +27,12 @@ type Column struct {
 
 // Card - one card
 type Card struct {
-	ID       uint `gorm:"primaryKey"`
-	Name     string
-	ColumnID uint
+	ID          uint `gorm:"primaryKey"`
+	Name        string
+	ColumnID    uint
+	Theme       string
+	Sort        uint
+	DateCreated string
+	DateUpdated string
+	DateMoved   string
 }

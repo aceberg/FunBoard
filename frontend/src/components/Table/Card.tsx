@@ -1,6 +1,6 @@
 import { createSignal } from "solid-js";
 import Modal from "../All/Modal";
-import { apiBoardGetByID, apiCardEdit } from "../../utils/api";
+import { apiBoardGetByID, apiCardDel, apiCardEdit } from "../../utils/api";
 import { curBoard, setCurBoard } from "../../utils/exports";
 
 export default function Card(_props: any) {
@@ -18,7 +18,7 @@ export default function Card(_props: any) {
       card.Name = cardName();
       
       console.log("Edit Card:", card);
-      apiCardEdit(card);
+      await apiCardEdit(card);
       setCurBoard(await apiBoardGetByID(curBoard.ID));
     }
   }
@@ -27,17 +27,25 @@ export default function Card(_props: any) {
     setCardName((e.target as HTMLInputElement).value);
   };
 
-  const cardClass = "bg-blue-100 border border-blue-300 text-blue-800 px-4 py-3 rounded"
+  const handleDel = async () => {
+    await apiCardDel(_props.item.ID);
+    setCurBoard(await apiBoardGetByID(curBoard.ID));
+  };
+
+  const cardClass = "card card-"+_props.item.Theme;
 
   return (<>
     <div class="p-1">
       <Modal
         isOpen={isOpen()}
-        body={
-        <input
+        body={<>
+          <input
           type="text" placeholder="Name" value={cardName()}
           class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" onInput={handleInput}
-        />
+          />
+          <button class="p-2" onClick={handleDel}>Del</button>
+          <p>Updated: {_props.item.DateUpdated}</p>
+        </>
         }
         modalClass={cardClass}
         onClose={closeModal}

@@ -3,6 +3,7 @@ import Card from "./Card"
 import { useDragAndDrop } from "@formkit/drag-and-drop/solid";
 import { apiBoardGetByID, apiCardEdit } from "../../utils/api";
 import { curBoard, setCurBoard } from "../../utils/exports";
+import AddCard from "./AddCard";
 
 function Column(_props: any) {
 
@@ -20,7 +21,7 @@ function Column(_props: any) {
             let card = { ..._props.col.Cards[i]};
             card.ColumnID = _props.col.ID;
 
-            apiCardEdit(card);
+            await apiCardEdit(card);
             setCurBoard(await apiBoardGetByID(curBoard.ID));
           }
         }
@@ -47,9 +48,13 @@ function Column(_props: any) {
         </div>
         </>
         : <>
-        <div class="border-b border-out text-center p-2 flex-none" onClick={handleFold}>
-          <span class="font-bold pr-3">{_props.col.Name}</span>
-          <span class="text-sm font-light">{_props.col.Cards.length}</span>
+        <div class="border-b border-out p-2 flex items-center justify-between">
+          <div class="text-center flex-1" onClick={handleFold}>
+            <span class="font-bold pr-3">{_props.col.Name}</span>
+            <span class="text-sm font-light">{_props.col.Cards.length}</span>
+          </div>
+          
+          <AddCard id={_props.col.ID}></AddCard>
         </div>
 
         <div ref={backList} class="h-full overflow-auto">

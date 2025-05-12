@@ -2,6 +2,7 @@ import { Card } from "./exports";
 
 export const apiPath = 'http://0.0.0.0:8857';
 
+// BOARD
 export const apiBoardGetByID = async (id:number) => {
 
   const url = apiPath+'/api/board/'+id;
@@ -10,6 +11,7 @@ export const apiBoardGetByID = async (id:number) => {
   return res;
 };
 
+// CARD
 export const apiCardEdit = async (card: Card) => {
   let data = new FormData();
   
@@ -18,4 +20,12 @@ export const apiCardEdit = async (card: Card) => {
   let request = new XMLHttpRequest();
   request.open("POST", apiPath+'/api/card', true);
   request.send(data);
+};
+
+export const apiCardDel = async (id:number) => {
+
+  const url = apiPath+'/api/card/del/'+id;
+  const res = await (await fetch(url)).json();
+
+  return res;
 };

@@ -5,6 +5,22 @@ export interface Card {
     ID: number;
     Name: string;
     ColumnID: number;
+    Theme: string;
+    Sort: number;
+    DateCreated: string;
+    DateUpdated: string;
+    DateMoved: string;
+};
+
+export const emptyCard:Card = {
+    ID: 0,
+    Name: "",
+    ColumnID: 0,
+    Theme: "",
+    Sort: 0,
+    DateCreated: "",
+    DateUpdated: "",
+    DateMoved: "",
 };
 
 export interface Column {

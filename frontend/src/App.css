@@ -7,3 +7,19 @@
   --color-text1: var(--color-slate-100);
   --color-text2: var(--color-slate-300);
 }
+
+.card {
+  @apply border px-4 py-3 rounded
+}
+
+.card-blue {
+  @apply bg-blue-100 border-blue-300 text-blue-800
+}
+
+.card-green {
+  @apply bg-green-100 border-green-300 text-green-800
+}
+
+.card-amber {
+  @apply bg-amber-100 border-amber-300 text-amber-800
+}
