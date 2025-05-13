@@ -1,6 +1,6 @@
 import { For } from "solid-js";
 import { curBoard } from "../utils/exports";
-import Column from "./Table/Column";
+import OneColumn from "./Column/OneColumn";
 
 function Table() {
 
@@ -8,7 +8,7 @@ function Table() {
     <>
       <div class="h-full min-w-full border border-out text-text2 flex flex-row">
         <For each={curBoard.Columns}>
-          {(col) => <Column col={col}></Column>}
+          {(col) => <OneColumn col={col}></OneColumn>}
         </For>
       </div>
     </>

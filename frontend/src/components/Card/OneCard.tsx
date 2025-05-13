@@ -3,7 +3,7 @@ import Modal from "../All/Modal";
 import { apiBoardGetByID, apiCardDel, apiCardEdit } from "../../utils/api";
 import { curBoard, setCurBoard } from "../../utils/exports";
 
-export default function Card(_props: any) {
+export default function OneCard(_props: any) {
 
   const [isOpen, setIsOpen] = createSignal(false);
 
@@ -44,7 +44,7 @@ export default function Card(_props: any) {
           class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" onInput={handleInput}
           />
           <button class="p-2" onClick={handleDel}>Del</button>
-          <p>Updated: {_props.item.DateUpdated}</p>
+          <p>Moved: {_props.item.DateMoved}</p>
         </>
         }
         modalClass={cardClass}

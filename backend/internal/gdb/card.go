@@ -8,31 +8,29 @@ import (
 )
 
 // CardDelete - delete Card by ID
-func CardDelete(id string) {
+func CardDelete(id string) bool {
 
 	err = db.Delete(&models.Card{}, id).Error
-	check.IfError(err)
+	return !check.IfError(err)
 }
 
 // CardEdit - update or add Card
-func CardEdit(card models.Card) {
+func CardEdit(card models.Card) bool {
 
 	now := time.Now().Format("2006-01-02 15:04:05")
 	if card.ID == 0 {
 		card.DateCreated = now
 		card.DateMoved = now
 	} else {
-		var oldCard models.Card
-		err = db.First(&oldCard, card.ID).Error
+		var columnID uint
+		err = db.Model(&models.Card{}).Select("column_id").Where("id = ?", card.ID).Scan(&columnID).Error
 		check.IfError(err)
 
-		if card.ColumnID != oldCard.ColumnID {
+		if card.ColumnID != columnID {
 			card.DateMoved = now
 		}
 	}
 
-	card.DateUpdated = now
-
 	err = db.Save(&card).Error
-	check.IfError(err)
+	return !check.IfError(err)
 }

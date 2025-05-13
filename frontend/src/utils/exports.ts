@@ -1,7 +1,7 @@
 import { createStore } from "solid-js/store";
 import { apiBoardGetByID } from "./api";
 
-export interface Card {
+export type Card = {
     ID: number;
     Name: string;
     ColumnID: number;
@@ -23,14 +23,14 @@ export const emptyCard:Card = {
     DateMoved: "",
 };
 
-export interface Column {
+export type Column = {
     ID: number;
     Name: string;
     Cards: Card[];
     Fold: boolean;
 };
 
-export interface Board {
+export type Board = {
 	ID:   number;
     Name: string;
     Columns: Column[];

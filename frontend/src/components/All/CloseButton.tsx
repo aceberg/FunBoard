@@ -8,7 +8,7 @@ export default function CloseButton(_props: any) {
               onClick={_props.closeModal}
               aria-label="Close"
             >
-              &times;
+              X
         </button>
     )
 }

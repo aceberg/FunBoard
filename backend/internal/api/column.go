@@ -12,26 +12,26 @@ import (
 	"github.com/aceberg/FunBoard/internal/models"
 )
 
-func cardDelete(c *gin.Context) {
+func columnDelete(c *gin.Context) {
 
 	idStr := c.Param("id")
-	log.Println("Delete Card", idStr)
+	log.Println("Delete Column", idStr)
 
-	ok := gdb.CardDelete(idStr)
+	ok := gdb.ColumnDelete(idStr)
 
 	c.IndentedJSON(http.StatusOK, ok)
 }
 
-func cardEdit(c *gin.Context) {
-	var card models.Card
+func columnEdit(c *gin.Context) {
+	var column models.Column
 
-	str := c.PostForm("card")
-	err := json.Unmarshal([]byte(str), &card)
+	str := c.PostForm("column")
+	err := json.Unmarshal([]byte(str), &column)
 	check.IfError(err)
 
-	log.Println("Edit Card", card)
+	log.Println("Edit Column", column)
 
-	ok := gdb.CardEdit(card)
+	ok := gdb.ColumnEdit(column)
 
 	c.IndentedJSON(http.StatusOK, ok)
 }
