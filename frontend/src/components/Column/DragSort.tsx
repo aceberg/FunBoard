@@ -62,7 +62,7 @@ export default function DragSort(_props: any) {
   return (
     <div ref={backList} class="h-full overflow-auto">
     <For each={backs()}>
-      {(back) => <OneCard item={back}></OneCard>}
+      {(back) => <OneCard card={back}></OneCard>}
     </For>
     </div>
   )

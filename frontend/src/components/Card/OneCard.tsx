@@ -1,57 +1,28 @@
 import { createSignal } from "solid-js";
-import Modal from "../All/Modal";
-import { apiBoardGetByID, apiCardDel, apiCardEdit } from "../../utils/api";
-import { curBoard, setCurBoard } from "../../utils/exports";
+import ModalCard from "./ModalCard";
 
 export default function OneCard(_props: any) {
 
   const [isOpen, setIsOpen] = createSignal(false);
 
-  const [cardName, setCardName] = createSignal(_props.item.Name);
-
-  const closeModal = async () => {
-    setIsOpen(false);
-
-    if (_props.item.Name !== cardName()) {
-      
-      let card = {..._props.item};
-      card.Name = cardName();
-      
-      console.log("Edit Card:", card);
-      await apiCardEdit(card);
-      setCurBoard(await apiBoardGetByID(curBoard.ID));
-    }
+  const handleOpen = () => {
+    setIsOpen(true);
   }
 
-  const handleInput = (e: Event) => {
-    setCardName((e.target as HTMLInputElement).value);
-  };
-
-  const handleDel = async () => {
-    await apiCardDel(_props.item.ID);
-    setCurBoard(await apiBoardGetByID(curBoard.ID));
-  };
-
-  const cardClass = "card card-"+_props.item.Theme;
+  const cardClass = "card card-"+_props.card.Theme;
 
   return (<>
     <div class="p-1">
-      <Modal
+
+      <ModalCard 
         isOpen={isOpen()}
-        body={<>
-          <input
-          type="text" placeholder="Name" value={cardName()}
-          class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" onInput={handleInput}
-          />
-          <button class="p-2" onClick={handleDel}>Del</button>
-          <p>Moved: {_props.item.DateMoved}</p>
-        </>
-        }
-        modalClass={cardClass}
-        onClose={closeModal}
-      ></Modal>
-      <div class={cardClass} onClick={() => setIsOpen(true)}>
-        <div>{cardName()}</div>
+        setIsOpen={setIsOpen}
+        card={_props.card}
+        id={_props.card.ColumnID}
+      ></ModalCard>
+        
+      <div class={cardClass} onClick={handleOpen}>
+        <div>{_props.card.Name}</div>
       </div>
     </div>
   </>)

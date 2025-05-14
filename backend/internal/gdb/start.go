@@ -17,6 +17,6 @@ func Start(path string) {
 	check.IfError(err)
 
 	// Migrate the schema
-	err = db.AutoMigrate(&models.Board{}, &models.Column{}, &models.Card{})
+	err = db.AutoMigrate(&models.Board{}, &models.Column{}, &models.Card{}, &models.ColumnProps{})
 	check.IfError(err)
 }

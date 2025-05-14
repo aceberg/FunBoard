@@ -30,6 +30,17 @@ type Column struct {
 	BoardID uint
 	Cards   []Card `gorm:"foreignKey:ColumnID"`
 	Sort    uint
+	Props   ColumnProps `gorm:"foreignKey:ColumnID"`
+}
+
+// ColumnProps - settings for cards in Column
+type ColumnProps struct {
+	ID          uint `gorm:"primaryKey"`
+	ColumnID    uint
+	GroupByDate bool
+	ShowID      bool
+	ShowDateCr  bool
+	ShowDateMv  bool
 }
 
 // Card - one card
