@@ -2,11 +2,13 @@ package web
 
 import (
 	"embed"
-	"html/template"
+	"io/fs"
 	"log"
 	"net/http"
 
-	"github.com/gin-gonic/gin"
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/filesystem"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 
 	"github.com/aceberg/FunBoard/internal/api"
 	"github.com/aceberg/FunBoard/internal/check"
@@ -20,11 +22,8 @@ var (
 
 	// pubFS - public folder
 	//
-	//go:embed public/assets/*
-	assetsFS embed.FS
-
-	//go:embed public/index.html
-	templFS embed.FS
+	//go:embed public/*
+	pubFS embed.FS
 )
 
 // Gui - start web server
@@ -49,17 +48,20 @@ func Gui(dirPath string) {
 	log.Printf("Web GUI at http://%s", address)
 	log.Println("=================================== ")
 
-	gin.SetMode(gin.ReleaseMode)
-	router := gin.Default()
+	app := fiber.New()
+	app.Use(logger.New())
 
-	templ := template.Must(template.New("").ParseFS(templFS, "public/index.html"))
-	router.SetHTMLTemplate(templ) // templates
+	api.Routes(app, &appConfig)
 
-	router.GET("/", indexHandler) // index.go
-	router.StaticFS("/fs", http.FS(assetsFS))
+	publicFS, err := fs.Sub(pubFS, "public")
+	check.IfError(err)
 
-	api.Routes(router, &appConfig)
+	app.Use("/", filesystem.New(filesystem.Config{
+		Root:   http.FS(publicFS),
+		Browse: true,
+		Index:  "index.html",
+	}))
 
-	err := router.Run(address)
+	err = app.Listen(address)
 	check.IfError(err)
 }

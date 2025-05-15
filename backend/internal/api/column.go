@@ -3,29 +3,27 @@ package api
 import (
 	"encoding/json"
 	"log"
-	"net/http"
-
-	"github.com/gin-gonic/gin"
 
 	"github.com/aceberg/FunBoard/internal/check"
 	"github.com/aceberg/FunBoard/internal/gdb"
 	"github.com/aceberg/FunBoard/internal/models"
+	"github.com/gofiber/fiber/v2"
 )
 
-func columnDelete(c *gin.Context) {
+func columnDelete(c *fiber.Ctx) error {
 
-	idStr := c.Param("id")
+	idStr := c.Params("id")
 	log.Println("Delete Column", idStr)
 
 	ok := gdb.ColumnDelete(idStr)
 
-	c.IndentedJSON(http.StatusOK, ok)
+	return c.JSON(ok)
 }
 
-func columnEdit(c *gin.Context) {
+func columnEdit(c *fiber.Ctx) error {
 	var column models.Column
 
-	str := c.PostForm("column")
+	str := c.FormValue("column")
 	err := json.Unmarshal([]byte(str), &column)
 	check.IfError(err)
 
@@ -33,13 +31,13 @@ func columnEdit(c *gin.Context) {
 
 	ok := gdb.ColumnEdit(column)
 
-	c.IndentedJSON(http.StatusOK, ok)
+	return c.JSON(ok)
 }
 
-func columnPropsEdit(c *gin.Context) {
+func columnPropsEdit(c *fiber.Ctx) error {
 	var props models.ColumnProps
 
-	str := c.PostForm("props")
+	str := c.FormValue("props")
 	err := json.Unmarshal([]byte(str), &props)
 	check.IfError(err)
 
@@ -47,5 +45,5 @@ func columnPropsEdit(c *gin.Context) {
 
 	ok := gdb.ColumnPropsEdit(props)
 
-	c.IndentedJSON(http.StatusOK, ok)
+	return c.JSON(ok)
 }

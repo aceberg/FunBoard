@@ -3,29 +3,28 @@ package api
 import (
 	"encoding/json"
 	"log"
-	"net/http"
 
-	"github.com/gin-gonic/gin"
+	"github.com/gofiber/fiber/v2"
 
 	"github.com/aceberg/FunBoard/internal/check"
 	"github.com/aceberg/FunBoard/internal/gdb"
 	"github.com/aceberg/FunBoard/internal/models"
 )
 
-func cardDelete(c *gin.Context) {
+func cardDelete(c *fiber.Ctx) error {
 
-	idStr := c.Param("id")
+	idStr := c.Params("id")
 	log.Println("Delete Card", idStr)
 
 	ok := gdb.CardDelete(idStr)
 
-	c.IndentedJSON(http.StatusOK, ok)
+	return c.JSON(ok)
 }
 
-func cardEdit(c *gin.Context) {
+func cardEdit(c *fiber.Ctx) error {
 	var card models.Card
 
-	str := c.PostForm("card")
+	str := c.FormValue("card")
 	err := json.Unmarshal([]byte(str), &card)
 	check.IfError(err)
 
@@ -33,5 +32,5 @@ func cardEdit(c *gin.Context) {
 
 	ok := gdb.CardEdit(card)
 
-	c.IndentedJSON(http.StatusOK, ok)
+	return c.JSON(ok)
 }

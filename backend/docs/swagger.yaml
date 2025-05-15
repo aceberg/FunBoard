@@ -1,0 +1,175 @@
+basePath: /
+definitions:
+  models.Board:
+    properties:
+      Columns:
+        items:
+          $ref: '#/definitions/models.Column'
+        type: array
+      ID:
+        type: integer
+      Name:
+        type: string
+    type: object
+  models.BoardInfo:
+    properties:
+      ID:
+        type: integer
+      Name:
+        type: string
+    type: object
+  models.Card:
+    properties:
+      ColumnID:
+        type: integer
+      DateCreated:
+        type: string
+      DateMoved:
+        type: string
+      ID:
+        type: integer
+      Name:
+        type: string
+      Sort:
+        type: integer
+      Theme:
+        type: string
+    type: object
+  models.Column:
+    properties:
+      BoardID:
+        type: integer
+      Cards:
+        items:
+          $ref: '#/definitions/models.Card'
+        type: array
+      Fold:
+        type: boolean
+      ID:
+        type: integer
+      Name:
+        type: string
+      Props:
+        $ref: '#/definitions/models.ColumnProps'
+      Sort:
+        type: integer
+    type: object
+  models.ColumnProps:
+    properties:
+      ColumnID:
+        type: integer
+      GroupByDate:
+        type: boolean
+      ID:
+        type: integer
+      ShowDateCr:
+        type: boolean
+      ShowDateMv:
+        type: boolean
+      ShowID:
+        type: boolean
+    type: object
+  models.Conf:
+    properties:
+      ConfPath:
+        type: string
+      DBPath:
+        type: string
+      DirPath:
+        type: string
+      Host:
+        type: string
+      Port:
+        type: string
+    type: object
+info:
+  contact:
+    url: https://github.com/aceberg/FunBoard
+  description: API built with Fiber v2
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  title: FunBoard API
+  version: "1.0"
+paths:
+  /api/board/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get Board details by its unique ID
+      parameters:
+      - description: Board ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Board'
+        "404":
+          description: Not Found
+      summary: Get a Board by ID
+      tags:
+      - board
+  /api/boards:
+    get:
+      consumes:
+      - application/json
+      description: Get IDs and Names of all Boards
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.BoardInfo'
+            type: array
+        "404":
+          description: Not Found
+      summary: Get all Boards
+      tags:
+      - board
+  /api/conf:
+    get:
+      consumes:
+      - application/json
+      description: Get app Config
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Conf'
+        "404":
+          description: Not Found
+      summary: Get app Config
+      tags:
+      - config
+    post:
+      consumes:
+      - application/json
+      description: Save app Config
+      parameters:
+      - description: App config
+        in: body
+        name: config
+        required: true
+        schema:
+          $ref: '#/definitions/models.Conf'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Not Found
+      summary: Save app Config
+      tags:
+      - config
+swagger: "2.0"

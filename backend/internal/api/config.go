@@ -1,42 +1,51 @@
 package api
 
 import (
-	"encoding/json"
 	"log"
-	"net/http"
 
-	"github.com/gin-gonic/gin"
+	"github.com/gofiber/fiber/v2"
 
 	"github.com/aceberg/FunBoard/internal/check"
 	"github.com/aceberg/FunBoard/internal/conf"
 	"github.com/aceberg/FunBoard/internal/models"
 )
 
-func apiHandler(c *gin.Context) {
+// getConfig godoc
+// @Summary      Get app Config
+// @Description  Get app Config
+// @Tags         config
+// @Accept       json
+// @Produce      json
+// @Success      200  {object}  models.Conf
+// @Failure      404
+// @Router       /api/conf [get]
+func getConfig(c *fiber.Ctx) error {
 
-	msg := "This is API"
-	log.Println(msg)
-
-	c.IndentedJSON(http.StatusOK, msg)
+	return c.JSON(appConfig)
 }
 
-func getConfig(c *gin.Context) {
-
-	c.IndentedJSON(http.StatusOK, appConfig)
-}
-
-func saveConf(c *gin.Context) {
+// saveConfig godoc
+// @Summary      Save app Config
+// @Description  Save app Config
+// @Tags         config
+// @Accept       json
+// @Produce      json
+// @Param config body models.Conf true "App config"
+// @Success      200
+// @Failure      404
+// @Router       /api/conf [post]
+func saveConf(c *fiber.Ctx) error {
 	var config models.Conf
 
-	str := c.PostForm("conf")
-	err := json.Unmarshal([]byte(str), &config)
+	err := c.BodyParser(&config)
 	check.IfError(err)
 
-	// log.Println("INFO: new config", config)
 	appConfig.Host = config.Host
 	appConfig.Port = config.Port
 
+	log.Println("INFO: new config", config)
+
 	conf.Write(appConfig)
 
-	c.IndentedJSON(http.StatusOK, true)
+	return c.SendString("")
 }
