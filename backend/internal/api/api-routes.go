@@ -30,4 +30,5 @@ func Routes(router *gin.Engine, conf *models.Conf) {
 	// column.go
 	router.GET("/api/column/del/:id", columnDelete)
 	router.POST("/api/column", columnEdit)
+	router.POST("/api/column/props", columnPropsEdit)
 }

@@ -36,4 +36,13 @@ export type Board = {
     Columns: Column[];
 };
 
+export type ColumnProps = {
+	ID:          number;
+	ColumnID:    number;
+	GroupByDate: boolean;
+	ShowID:      boolean;
+	ShowDateCr:  boolean;
+	ShowDateMv:  boolean;
+}
+
 export const [curBoard, setCurBoard] = createStore<Board>(await apiBoardGetByID(1));

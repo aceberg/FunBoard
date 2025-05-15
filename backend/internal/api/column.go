@@ -35,3 +35,17 @@ func columnEdit(c *gin.Context) {
 
 	c.IndentedJSON(http.StatusOK, ok)
 }
+
+func columnPropsEdit(c *gin.Context) {
+	var props models.ColumnProps
+
+	str := c.PostForm("props")
+	err := json.Unmarshal([]byte(str), &props)
+	check.IfError(err)
+
+	log.Println("Edit Column Props", props)
+
+	ok := gdb.ColumnPropsEdit(props)
+
+	c.IndentedJSON(http.StatusOK, ok)
+}

@@ -1,4 +1,4 @@
-import { Card, Column } from "./exports";
+import { Card, Column, ColumnProps } from "./exports";
 
 export const apiPath = 'http://0.0.0.0:8857';
 
@@ -38,6 +38,16 @@ export const apiColumnEdit = async (column: Column) => {
 
   let request = new XMLHttpRequest();
   request.open("POST", apiPath+'/api/column');
+  request.send(data);
+};
+
+export const apiColumnPropsEdit = async (column: ColumnProps) => {
+  let data = new FormData();
+  
+  data.set('props', JSON.stringify(column));
+
+  let request = new XMLHttpRequest();
+  request.open("POST", apiPath+'/api/column/props');
   request.send(data);
 };
 

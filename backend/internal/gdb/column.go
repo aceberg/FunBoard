@@ -18,3 +18,10 @@ func ColumnEdit(column models.Column) bool {
 	err = db.Save(&column).Error
 	return !check.IfError(err)
 }
+
+// ColumnPropsEdit - update or add ColumnProps
+func ColumnPropsEdit(props models.ColumnProps) bool {
+
+	err = db.Save(&props).Error
+	return !check.IfError(err)
+}
