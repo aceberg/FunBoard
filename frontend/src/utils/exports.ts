@@ -1,5 +1,4 @@
 import { createStore } from "solid-js/store";
-import { apiBoardGetByID } from "./api";
 
 export type Card = {
     ID: number;
@@ -45,4 +44,10 @@ export type ColumnProps = {
 	ShowDateMv:  boolean;
 }
 
-export const [curBoard, setCurBoard] = createStore<Board>(await apiBoardGetByID(1));
+const emptyBoard:Board = {
+    ID: 0,
+    Name: "",
+    Columns: [],
+}
+
+export const [curBoard, setCurBoard] = createStore<Board>(emptyBoard);

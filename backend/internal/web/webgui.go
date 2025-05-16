@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/filesystem"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 
@@ -50,6 +51,8 @@ func Gui(dirPath string) {
 
 	app := fiber.New()
 	app.Use(logger.New())
+	// Only for DEV
+	app.Use(cors.New())
 
 	api.Routes(app, &appConfig)
 

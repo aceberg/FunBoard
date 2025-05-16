@@ -1,7 +1,6 @@
 package api
 
 import (
-	"encoding/json"
 	"log"
 
 	"github.com/gofiber/fiber/v2"
@@ -11,6 +10,16 @@ import (
 	"github.com/aceberg/FunBoard/internal/models"
 )
 
+// cardDelete godoc
+// @Summary      Delete Card by ID
+// @Description  Delete Card by ID
+// @Tags         card
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "Card ID"
+// @Success      200  {object}  bool
+// @Failure      404
+// @Router       /api/card/del/{id} [get]
 func cardDelete(c *fiber.Ctx) error {
 
 	idStr := c.Params("id")
@@ -21,11 +30,20 @@ func cardDelete(c *fiber.Ctx) error {
 	return c.JSON(ok)
 }
 
+// cardEdit godoc
+// @Summary      Edit or add Card
+// @Description  Edit existing Card by ID or add new Card (if ID=0)
+// @Tags         card
+// @Accept       json
+// @Produce      json
+// @Param card body models.Card true "Card"
+// @Success      200 {object}  bool
+// @Failure      404
+// @Router       /api/card [post]
 func cardEdit(c *fiber.Ctx) error {
 	var card models.Card
 
-	str := c.FormValue("card")
-	err := json.Unmarshal([]byte(str), &card)
+	err := c.BodyParser(&card)
 	check.IfError(err)
 
 	log.Println("Edit Card", card)

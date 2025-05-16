@@ -13,13 +13,17 @@ export const apiBoardGetByID = async (id:number) => {
 
 // CARD
 export const apiCardEdit = async (card: Card) => {
-  let data = new FormData();
   
-  data.set('card', JSON.stringify(card));
+  const res = await fetch(apiPath+'/api/card', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(card),
+  });
 
-  let request = new XMLHttpRequest();
-  request.open("POST", apiPath+'/api/card');
-  request.send(data);
+  const result: boolean = await res.json();
+  return result;
 };
 
 export const apiCardDel = async (id:number) => {
@@ -32,23 +36,31 @@ export const apiCardDel = async (id:number) => {
 
 // COLUMN
 export const apiColumnEdit = async (column: Column) => {
-  let data = new FormData();
   
-  data.set('column', JSON.stringify(column));
+  const res = await fetch(apiPath+'/api/column', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(column),
+  });
 
-  let request = new XMLHttpRequest();
-  request.open("POST", apiPath+'/api/column');
-  request.send(data);
+  const result: boolean = await res.json();
+  return result;
 };
 
 export const apiColumnPropsEdit = async (column: ColumnProps) => {
-  let data = new FormData();
   
-  data.set('props', JSON.stringify(column));
+  const res = await fetch(apiPath+'/api/column/props', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(column),
+  });
 
-  let request = new XMLHttpRequest();
-  request.open("POST", apiPath+'/api/column/props');
-  request.send(data);
+  const result: boolean = await res.json();
+  return result;
 };
 
 export const apiColumnDel = async (id:number) => {

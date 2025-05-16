@@ -92,6 +92,30 @@ info:
   title: FunBoard API
   version: "1.0"
 paths:
+  /api/board:
+    post:
+      consumes:
+      - application/json
+      description: Edit existing Board by ID or add new Board (if ID=0)
+      parameters:
+      - description: Board
+        in: body
+        name: board
+        required: true
+        schema:
+          $ref: '#/definitions/models.Board'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: boolean
+        "404":
+          description: Not Found
+      summary: Edit or add Board
+      tags:
+      - board
   /api/board/{id}:
     get:
       consumes:
@@ -112,7 +136,30 @@ paths:
             $ref: '#/definitions/models.Board'
         "404":
           description: Not Found
-      summary: Get a Board by ID
+      summary: Get Board by ID
+      tags:
+      - board
+  /api/board/del/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Delete Board by ID
+      parameters:
+      - description: Board ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: boolean
+        "404":
+          description: Not Found
+      summary: Delete Board by ID
       tags:
       - board
   /api/boards:
@@ -134,6 +181,124 @@ paths:
       summary: Get all Boards
       tags:
       - board
+  /api/card:
+    post:
+      consumes:
+      - application/json
+      description: Edit existing Card by ID or add new Card (if ID=0)
+      parameters:
+      - description: Card
+        in: body
+        name: card
+        required: true
+        schema:
+          $ref: '#/definitions/models.Card'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: boolean
+        "404":
+          description: Not Found
+      summary: Edit or add Card
+      tags:
+      - card
+  /api/card/del/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Delete Card by ID
+      parameters:
+      - description: Card ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: boolean
+        "404":
+          description: Not Found
+      summary: Delete Card by ID
+      tags:
+      - card
+  /api/column:
+    post:
+      consumes:
+      - application/json
+      description: Edit existing Column by ID or add new Column (if ID=0)
+      parameters:
+      - description: Column
+        in: body
+        name: column
+        required: true
+        schema:
+          $ref: '#/definitions/models.Column'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: boolean
+        "404":
+          description: Not Found
+      summary: Edit or add Column
+      tags:
+      - column
+  /api/column/del/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Delete Column by ID
+      parameters:
+      - description: Column ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: boolean
+        "404":
+          description: Not Found
+      summary: Delete Column by ID
+      tags:
+      - column
+  /api/column/props:
+    post:
+      consumes:
+      - application/json
+      description: Edit Column Properties
+      parameters:
+      - description: Column Props
+        in: body
+        name: props
+        required: true
+        schema:
+          $ref: '#/definitions/models.ColumnProps'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: boolean
+        "404":
+          description: Not Found
+      summary: Edit Column Properties
+      tags:
+      - column
   /api/conf:
     get:
       consumes:

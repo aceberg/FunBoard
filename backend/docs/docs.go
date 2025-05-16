@@ -21,6 +21,78 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/api/board": {
+            "post": {
+                "description": "Edit existing Board by ID or add new Board (if ID=0)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "board"
+                ],
+                "summary": "Edit or add Board",
+                "parameters": [
+                    {
+                        "description": "Board",
+                        "name": "board",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Board"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/board/del/{id}": {
+            "get": {
+                "description": "Delete Board by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "board"
+                ],
+                "summary": "Delete Board by ID",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Board ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
         "/api/board/{id}": {
             "get": {
                 "description": "Get Board details by its unique ID",
@@ -33,7 +105,7 @@ const docTemplate = `{
                 "tags": [
                     "board"
                 ],
-                "summary": "Get a Board by ID",
+                "summary": "Get Board by ID",
                 "parameters": [
                     {
                         "type": "integer",
@@ -77,6 +149,187 @@ const docTemplate = `{
                             "items": {
                                 "$ref": "#/definitions/models.BoardInfo"
                             }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/card": {
+            "post": {
+                "description": "Edit existing Card by ID or add new Card (if ID=0)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "card"
+                ],
+                "summary": "Edit or add Card",
+                "parameters": [
+                    {
+                        "description": "Card",
+                        "name": "card",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Card"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/card/del/{id}": {
+            "get": {
+                "description": "Delete Card by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "card"
+                ],
+                "summary": "Delete Card by ID",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Card ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/column": {
+            "post": {
+                "description": "Edit existing Column by ID or add new Column (if ID=0)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "column"
+                ],
+                "summary": "Edit or add Column",
+                "parameters": [
+                    {
+                        "description": "Column",
+                        "name": "column",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Column"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/column/del/{id}": {
+            "get": {
+                "description": "Delete Column by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "column"
+                ],
+                "summary": "Delete Column by ID",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Column ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/column/props": {
+            "post": {
+                "description": "Edit Column Properties",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "column"
+                ],
+                "summary": "Edit Column Properties",
+                "parameters": [
+                    {
+                        "description": "Column Props",
+                        "name": "props",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.ColumnProps"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "boolean"
                         }
                     },
                     "404": {

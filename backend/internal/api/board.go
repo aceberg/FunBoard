@@ -1,7 +1,6 @@
 package api
 
 import (
-	"encoding/json"
 	"log"
 
 	"github.com/gofiber/fiber/v2"
@@ -12,7 +11,7 @@ import (
 )
 
 // boardGetByID godoc
-// @Summary      Get a Board by ID
+// @Summary      Get Board by ID
 // @Description  Get Board details by its unique ID
 // @Tags         board
 // @Accept       json
@@ -47,11 +46,20 @@ func boardsGetAll(c *fiber.Ctx) error {
 	return c.JSON(boards)
 }
 
+// boardEdit godoc
+// @Summary      Edit or add Board
+// @Description  Edit existing Board by ID or add new Board (if ID=0)
+// @Tags         board
+// @Accept       json
+// @Produce      json
+// @Param board body models.Board true "Board"
+// @Success      200 {object}  bool
+// @Failure      404
+// @Router       /api/board [post]
 func boardEdit(c *fiber.Ctx) error {
 	var board models.Board
 
-	str := c.FormValue("board")
-	err := json.Unmarshal([]byte(str), &board)
+	err := c.BodyParser(&board)
 	check.IfError(err)
 
 	log.Println("Edit Board", board)
@@ -61,6 +69,16 @@ func boardEdit(c *fiber.Ctx) error {
 	return c.JSON(ok)
 }
 
+// boardDelete godoc
+// @Summary      Delete Board by ID
+// @Description  Delete Board by ID
+// @Tags         board
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "Board ID"
+// @Success      200  {object}  bool
+// @Failure      404
+// @Router       /api/board/del/{id} [get]
 func boardDelete(c *fiber.Ctx) error {
 
 	idStr := c.Params("id")

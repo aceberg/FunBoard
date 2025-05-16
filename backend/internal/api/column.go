@@ -1,7 +1,6 @@
 package api
 
 import (
-	"encoding/json"
 	"log"
 
 	"github.com/aceberg/FunBoard/internal/check"
@@ -10,6 +9,16 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+// columnDelete godoc
+// @Summary      Delete Column by ID
+// @Description  Delete Column by ID
+// @Tags         column
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "Column ID"
+// @Success      200  {object}  bool
+// @Failure      404
+// @Router       /api/column/del/{id} [get]
 func columnDelete(c *fiber.Ctx) error {
 
 	idStr := c.Params("id")
@@ -20,11 +29,20 @@ func columnDelete(c *fiber.Ctx) error {
 	return c.JSON(ok)
 }
 
+// columnEdit godoc
+// @Summary      Edit or add Column
+// @Description  Edit existing Column by ID or add new Column (if ID=0)
+// @Tags         column
+// @Accept       json
+// @Produce      json
+// @Param column body models.Column true "Column"
+// @Success      200 {object}  bool
+// @Failure      404
+// @Router       /api/column [post]
 func columnEdit(c *fiber.Ctx) error {
 	var column models.Column
 
-	str := c.FormValue("column")
-	err := json.Unmarshal([]byte(str), &column)
+	err := c.BodyParser(&column)
 	check.IfError(err)
 
 	log.Println("Edit Column", column)
@@ -34,11 +52,20 @@ func columnEdit(c *fiber.Ctx) error {
 	return c.JSON(ok)
 }
 
+// columnPropsEdit godoc
+// @Summary      Edit Column Properties
+// @Description  Edit Column Properties
+// @Tags         column
+// @Accept       json
+// @Produce      json
+// @Param props body models.ColumnProps true "Column Props"
+// @Success      200 {object}  bool
+// @Failure      404
+// @Router       /api/column/props [post]
 func columnPropsEdit(c *fiber.Ctx) error {
 	var props models.ColumnProps
 
-	str := c.FormValue("props")
-	err := json.Unmarshal([]byte(str), &props)
+	err := c.BodyParser(&props)
 	check.IfError(err)
 
 	log.Println("Edit Column Props", props)

@@ -12,8 +12,8 @@ export default function OneColumn(_props: any) {
 
   const handleFold = async () => {
     
-    await apiColumnEdit({..._props.col, Fold: !fold()});
     setFold(!fold());
+    await apiColumnEdit({..._props.col, Fold: fold()});
   }
 
   return (
