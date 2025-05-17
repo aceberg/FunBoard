@@ -42,14 +42,16 @@ export default function Modal(_props: any) {
   return (
     <>
       {_props.isOpen && (
-        <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div
-            ref={modalRef}
-            class={_props.modalClass + " relative shadow-xl w-full max-w-lg"}
-          >
-            <CloseButton closeModal={closeModal}></CloseButton>
+        <div class="fixed inset-0 z-50 flex justify-center bg-black/50">
+          <div class="mt-[20vh] w-full max-w-lg">
+            <div
+              ref={modalRef}
+              class={_props.modalClass + " relative shadow-xl"}
+            >
+              <CloseButton closeModal={closeModal}></CloseButton>
 
-            {_props.body}
+              {_props.body}
+            </div>
           </div>
         </div>
       )}

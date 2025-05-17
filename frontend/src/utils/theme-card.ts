@@ -1,6 +1,13 @@
 export const defaultThemes = ["red", "orange", "amber", "yellow", "lime", "green", "emerald", "teal", "cyan", "sky", "blue", "indigo", "violet", "purple", "fuchsia", "pink"];
 
-export function cardClass(color: keyof typeof colorClasses) {
+// export function getCardColors(color: keyof typeof colorClasses) {
+    
+//     const c = colorClasses[color] ?? colorClasses.blue; // fallback
+    
+//     return c;
+// };
+
+export function getCardClass(color: keyof typeof colorClasses) {
     
     const c = colorClasses[color] ?? colorClasses.blue; // fallback
     

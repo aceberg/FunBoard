@@ -1,14 +1,13 @@
-import { createSignal, For } from "solid-js";
+import { createEffect, createSignal, For } from "solid-js";
 import Modal from "../All/Modal";
 import { apiBoardGetByID, apiCardDel, apiCardEdit } from "../../utils/api";
 import { curBoard, setCurBoard } from "../../utils/exports";
-import { cardClass, defaultThemes } from "../../utils/theme-card";
+import { defaultThemes, getCardClass } from "../../utils/theme-card";
+import Dropdown from "../All/Dropdown";
 
 export default function ModalCard(_props: any) {
-  type SortEvent = Event & {
-    currentTarget: HTMLSelectElement;
-    target: HTMLSelectElement;
-  };
+
+  let textareaRef: HTMLTextAreaElement | undefined;
 
   const [cardName, setCardName] = createSignal(_props.card.Name);
   const [cardTheme, setCardTheme] = createSignal(_props.card.Theme);
@@ -27,53 +26,68 @@ export default function ModalCard(_props: any) {
       await apiCardEdit(card);
       setTimeout(async () => {
         setCurBoard(await apiBoardGetByID(curBoard.ID));
-      }, 200); // 0.2 second
+      }, 100); // 0.1 second
     }
   }
 
   const handleInput = (e: Event) => {
     setCardName((e.target as HTMLInputElement).value);
+    resizeTextarea();
+  };
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === "Enter") {
+      closeModal();
+    }
   };
 
   const handleDel = async () => {
     await apiCardDel(_props.card.ID);
     setTimeout(async () => {
       setCurBoard(await apiBoardGetByID(curBoard.ID));
-    }, 200); // 0.2 second
+    }, 100); // 0.1 second
   };
 
-  const handleSort = (event: SortEvent) => {
-    const value = event.target ? event.target.value : "default";
-    setCardTheme(value);
-  }
+  const resizeTextarea = () => {
+    if (textareaRef) {
+      textareaRef.style.height = "auto";
+      textareaRef.style.height = textareaRef.scrollHeight + "px";
+    }
+  };
 
-  // const cardTheme = cardClass(_props.card.Theme);
+  createEffect(() => {
+    _props.isOpen;
+    resizeTextarea();
+  });
 
   return (<>
     <Modal
       isOpen={_props.isOpen}
       body={<>
-      <div class={cardClass(cardTheme())}>
+      <div class={getCardClass(cardTheme())}>
         <div class="flex px-1 mb-3">
           <div class="font-normal font-mono">
             <div class="text-sm border rounded w-fit px-1 me-2">#{_props.card.ID}</div>
           </div>
-          <input
-            class="py-1 border-0 focus:outline-none w-full"
-            type="text" placeholder="Name" value={cardName()}
-            onInput={handleInput}>
-          </input>
+          <textarea
+            ref={textareaRef} rows="1"
+            class="py-1 border-0 focus:outline-none w-full resize-none overflow-hidden"
+            placeholder="Card Name" value={cardName()}
+            onInput={handleInput}
+            onKeyDown={handleKeyDown}>
+          </textarea>
         </div>
         <div class="flex px-2 text-sm gap-4">
-          <button class="border rounded p-1" onClick={handleDel}>Delete</button>
-          <div class="border rounded p-1">
-            <span class="px-2">Color:</span>
-            <select onChange={(event)=>{handleSort(event)}} value={cardTheme()}>
-              <For each={defaultThemes}>
-                {(theme) => <option value={theme}>{theme}</option>}
-              </For>
-            </select>
-          </div>
+          <Dropdown label={<><i class="bi bi-list pr-1"></i>Edit</>} 
+            class="border rounded p-1 px-2">
+            <p class="dd" onClick={handleDel}>Delete</p>
+          </Dropdown>
+          <Dropdown label={<><i class="bi bi-paint-bucket pr-2"></i>Color: {cardTheme()}</>} 
+            class="border rounded p-1 px-2">
+            <For each={defaultThemes}>
+              {(theme) => <p class="dd" onClick={() => setCardTheme(theme)}>{theme}</p>}
+            </For>
+          </Dropdown>
         </div>
         
         <hr class="mt-2 mb-1 border-t border-dashed"></hr>

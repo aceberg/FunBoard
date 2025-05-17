@@ -1,6 +1,6 @@
 import { createSignal } from "solid-js";
 import ModalCard from "./ModalCard";
-import { cardClass } from "../../utils/theme-card";
+import { getCardClass } from "../../utils/theme-card";
 
 export default function OneCard(_props: any) {
 
@@ -10,7 +10,7 @@ export default function OneCard(_props: any) {
     setIsOpen(true);
   }
 
-  const cardTheme = cardClass(_props.card.Theme);
+  const cardTheme = getCardClass(_props.card.Theme);
   // const cardTheme = "card card-"+_props.card.Theme;
 
   return (<>
