@@ -32,6 +32,10 @@ definitions:
         type: string
       Sort:
         type: integer
+      Tasks:
+        items:
+          $ref: '#/definitions/models.Subtask'
+        type: array
       Theme:
         type: string
     type: object
@@ -80,6 +84,17 @@ definitions:
       Host:
         type: string
       Port:
+        type: string
+    type: object
+  models.Subtask:
+    properties:
+      Checked:
+        type: boolean
+      ColumnID:
+        type: integer
+      ID:
+        type: integer
+      Task:
         type: string
     type: object
 info:
@@ -337,4 +352,51 @@ paths:
       summary: Save app Config
       tags:
       - config
+  /api/subtask:
+    post:
+      consumes:
+      - application/json
+      description: Edit existing Subtask by ID or add new Subtask (if ID=0)
+      parameters:
+      - description: Subtask
+        in: body
+        name: subtask
+        required: true
+        schema:
+          $ref: '#/definitions/models.Subtask'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: boolean
+        "404":
+          description: Not Found
+      summary: Edit or add Card Subtask
+      tags:
+      - subtask
+  /api/subtask/del/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Delete Card Subtask by ID
+      parameters:
+      - description: Subtask ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: boolean
+        "404":
+          description: Not Found
+      summary: Delete Card Subtask by ID
+      tags:
+      - subtask
 swagger: "2.0"

@@ -1,8 +1,6 @@
 package api
 
 import (
-	"log"
-
 	"github.com/aceberg/FunBoard/internal/check"
 	"github.com/aceberg/FunBoard/internal/gdb"
 	"github.com/aceberg/FunBoard/internal/models"
@@ -22,7 +20,7 @@ import (
 func columnDelete(c *fiber.Ctx) error {
 
 	idStr := c.Params("id")
-	log.Println("Delete Column", idStr)
+	// log.Println("Delete Column", idStr)
 
 	ok := gdb.ColumnDelete(idStr)
 
@@ -45,7 +43,7 @@ func columnEdit(c *fiber.Ctx) error {
 	err := c.BodyParser(&column)
 	check.IfError(err)
 
-	log.Println("Edit Column", column)
+	// log.Println("Edit Column", column)
 
 	ok := gdb.ColumnEdit(column)
 
@@ -68,7 +66,7 @@ func columnPropsEdit(c *fiber.Ctx) error {
 	err := c.BodyParser(&props)
 	check.IfError(err)
 
-	log.Println("Edit Column Props", props)
+	// log.Println("Edit Column Props", props)
 
 	ok := gdb.ColumnPropsEdit(props)
 

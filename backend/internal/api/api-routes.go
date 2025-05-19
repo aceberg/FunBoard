@@ -31,6 +31,10 @@ func Routes(app *fiber.App, conf *models.Conf) {
 	app.Get("/api/card/del/:id", cardDelete)
 	app.Post("/api/card", cardEdit)
 
+	// subtask.go
+	app.Get("/api/subtask/del/:id", subtaskDelete)
+	app.Post("/api/subtask", subtaskEdit)
+
 	// column.go
 	app.Get("/api/column/del/:id", columnDelete)
 	app.Post("/api/column", columnEdit)

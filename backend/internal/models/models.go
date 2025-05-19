@@ -45,11 +45,20 @@ type ColumnProps struct {
 
 // Card - one card
 type Card struct {
-	ID          uint   `json:"ID" gorm:"primaryKey"`
-	Name        string `json:"Name"`
-	ColumnID    uint   `json:"ColumnID"`
-	Theme       string `json:"Theme"`
-	Sort        uint   `json:"Sort"`
-	DateCreated string `json:"DateCreated"`
-	DateMoved   string `json:"DateMoved"`
+	ID          uint      `json:"ID" gorm:"primaryKey"`
+	Name        string    `json:"Name"`
+	ColumnID    uint      `json:"ColumnID"`
+	Theme       string    `json:"Theme"`
+	Sort        uint      `json:"Sort"`
+	DateCreated string    `json:"DateCreated"`
+	DateMoved   string    `json:"DateMoved"`
+	Tasks       []Subtask `json:"Tasks" gorm:"foreignKey:CardID"`
+}
+
+// Subtask - Card subtask
+type Subtask struct {
+	ID      uint   `json:"ID" gorm:"primaryKey"`
+	CardID  uint   `json:"ColumnID"`
+	Task    string `json:"Task"`
+	Checked bool   `json:"Checked"`
 }

@@ -1,8 +1,6 @@
 package api
 
 import (
-	"log"
-
 	"github.com/gofiber/fiber/v2"
 
 	"github.com/aceberg/FunBoard/internal/check"
@@ -23,7 +21,7 @@ import (
 func cardDelete(c *fiber.Ctx) error {
 
 	idStr := c.Params("id")
-	log.Println("Delete Card", idStr)
+	// log.Println("Delete Card", idStr)
 
 	ok := gdb.CardDelete(idStr)
 
@@ -46,7 +44,7 @@ func cardEdit(c *fiber.Ctx) error {
 	err := c.BodyParser(&card)
 	check.IfError(err)
 
-	log.Println("Edit Card", card)
+	// log.Println("Edit Card", card)
 
 	ok := gdb.CardEdit(card)
 

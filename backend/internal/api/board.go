@@ -1,8 +1,6 @@
 package api
 
 import (
-	"log"
-
 	"github.com/gofiber/fiber/v2"
 
 	"github.com/aceberg/FunBoard/internal/check"
@@ -23,9 +21,9 @@ import (
 func boardGetByID(c *fiber.Ctx) error {
 
 	idStr := c.Params("id")
-	log.Println("Getting Board", idStr)
+	// log.Println("Getting Board", idStr)
 
-	board := gdb.BoardGetByID("1")
+	board := gdb.BoardGetByID(idStr)
 
 	return c.JSON(board)
 }
@@ -62,7 +60,7 @@ func boardEdit(c *fiber.Ctx) error {
 	err := c.BodyParser(&board)
 	check.IfError(err)
 
-	log.Println("Edit Board", board)
+	// log.Println("Edit Board", board)
 
 	ok := gdb.BoardEdit(board)
 
@@ -82,7 +80,7 @@ func boardEdit(c *fiber.Ctx) error {
 func boardDelete(c *fiber.Ctx) error {
 
 	idStr := c.Params("id")
-	log.Println("Delete Board", idStr)
+	// log.Println("Delete Board", idStr)
 
 	ok := gdb.BoardDelete(idStr)
 

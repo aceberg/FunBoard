@@ -395,6 +395,78 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/api/subtask": {
+            "post": {
+                "description": "Edit existing Subtask by ID or add new Subtask (if ID=0)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "subtask"
+                ],
+                "summary": "Edit or add Card Subtask",
+                "parameters": [
+                    {
+                        "description": "Subtask",
+                        "name": "subtask",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Subtask"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/subtask/del/{id}": {
+            "get": {
+                "description": "Delete Card Subtask by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "subtask"
+                ],
+                "summary": "Delete Card Subtask by ID",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Subtask ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -446,6 +518,12 @@ const docTemplate = `{
                 },
                 "Sort": {
                     "type": "integer"
+                },
+                "Tasks": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Subtask"
+                    }
                 },
                 "Theme": {
                     "type": "string"
@@ -520,6 +598,23 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "Port": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.Subtask": {
+            "type": "object",
+            "properties": {
+                "Checked": {
+                    "type": "boolean"
+                },
+                "ColumnID": {
+                    "type": "integer"
+                },
+                "ID": {
+                    "type": "integer"
+                },
+                "Task": {
                     "type": "string"
                 }
             }
