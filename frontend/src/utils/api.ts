@@ -12,6 +12,14 @@ export const apiBoardGetByID = async (id:number) => {
 };
 
 // CARD
+export const apiCardGetByID = async (id:number) => {
+
+  const url = apiPath+'/api/card/'+id;
+  const res = await (await fetch(url)).json();
+
+  return res;
+};
+
 export const apiCardEdit = async (card: Card) => {
   
   const res = await fetch(apiPath+'/api/card', {
@@ -34,7 +42,7 @@ export const apiCardDel = async (id:number) => {
   return res;
 };
 
-// Subtask
+// SUBTASK
 export const apiSubtaskEdit = async (subtask: Subtask) => {
   
   const res = await fetch(apiPath+'/api/subtask', {
@@ -49,7 +57,23 @@ export const apiSubtaskEdit = async (subtask: Subtask) => {
   return result;
 };
 
+export const apiSubtaskDel = async (id:number) => {
+
+  const url = apiPath+'/api/subtask/del/'+id;
+  const res = await (await fetch(url)).json();
+
+  return res;
+};
+
 // COLUMN
+// export const apiColumnGetByID = async (id:number) => {
+
+//   const url = apiPath+'/api/column/'+id;
+//   const res = await (await fetch(url)).json();
+
+//   return res;
+// };
+
 export const apiColumnEdit = async (column: Column) => {
   
   const res = await fetch(apiPath+'/api/column', {

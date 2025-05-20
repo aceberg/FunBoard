@@ -15,6 +15,7 @@ var err error
 func Start(path string) {
 	db, err = gorm.Open(sqlite.Open(path), &gorm.Config{})
 	check.IfError(err)
+	// db.Exec("PRAGMA foreign_keys = ON") // must be called for SQLite
 
 	// Migrate the schema
 	err = db.AutoMigrate(&models.Board{}, &models.Column{}, &models.Card{}, &models.ColumnProps{}, &models.Subtask{})

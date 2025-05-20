@@ -38,7 +38,6 @@ export default function OneColumn(_props: any) {
           
           <SettingsModal conf={_props.col.Props} id={_props.col.ID}></SettingsModal>
         </div>
-
           <DragSort col={_props.col}></DragSort>
         </>
         }

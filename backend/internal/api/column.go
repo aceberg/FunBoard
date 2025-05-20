@@ -27,6 +27,25 @@ func columnDelete(c *fiber.Ctx) error {
 	return c.JSON(ok)
 }
 
+// columnGetByID godoc
+// @Summary      Get Column by ID
+// @Description  Get Column by ID
+// @Tags         column
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "Column ID"
+// @Success      200  {object}  models.Column
+// @Failure      404
+// @Router       /api/column/{id} [get]
+func columnGetByID(c *fiber.Ctx) error {
+
+	idStr := c.Params("id")
+
+	column := gdb.ColumnGetByID(idStr)
+
+	return c.JSON(column)
+}
+
 // columnEdit godoc
 // @Summary      Edit or add Column
 // @Description  Edit existing Column by ID or add new Column (if ID=0)

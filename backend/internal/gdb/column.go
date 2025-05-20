@@ -5,6 +5,15 @@ import (
 	"github.com/aceberg/FunBoard/internal/models"
 )
 
+// ColumnGetByID - get one column
+func ColumnGetByID(id string) (column models.Column) {
+
+	err = db.Preload("Cards").Preload("Props").Preload("Cards.Tasks").First(&column, id).Error
+	check.IfError(err)
+
+	return column
+}
+
 // ColumnDelete - delete Column by ID
 func ColumnDelete(id string) bool {
 

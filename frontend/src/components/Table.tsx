@@ -1,5 +1,5 @@
 import { For } from "solid-js";
-import { curBoard } from "../utils/exports";
+import { curBoard } from "../utils/store";
 import OneColumn from "./Column/OneColumn";
 
 function Table() {

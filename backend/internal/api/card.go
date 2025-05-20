@@ -28,6 +28,26 @@ func cardDelete(c *fiber.Ctx) error {
 	return c.JSON(ok)
 }
 
+// cardGetByID godoc
+// @Summary      Get Card by ID
+// @Description  Get Card by ID
+// @Tags         card
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "Card ID"
+// @Success      200  {object}  models.Card
+// @Failure      404
+// @Router       /api/card/{id} [get]
+func cardGetByID(c *fiber.Ctx) error {
+
+	idStr := c.Params("id")
+	// log.Println("Delete Card", idStr)
+
+	card := gdb.CardGetByID(idStr)
+
+	return c.JSON(card)
+}
+
 // cardEdit godoc
 // @Summary      Edit or add Card
 // @Description  Edit existing Card by ID or add new Card (if ID=0)

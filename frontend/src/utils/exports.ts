@@ -1,5 +1,3 @@
-import { createStore } from "solid-js/store";
-
 export type Card = {
     ID: number;
     Name: string;
@@ -9,6 +7,7 @@ export type Card = {
     DateCreated: string;
     DateUpdated: string;
     DateMoved: string;
+    Tasks: Subtask[];
 };
 
 export const emptyCard:Card = {
@@ -20,6 +19,7 @@ export const emptyCard:Card = {
     DateCreated: "",
     DateUpdated: "",
     DateMoved: "",
+    Tasks: []
 };
 
 export type Column = {
@@ -27,6 +27,7 @@ export type Column = {
     Name: string;
     Cards: Card[];
     Fold: boolean;
+    Props: ColumnProps;
 };
 
 export type Board = {
@@ -51,11 +52,3 @@ export type Subtask = {
     Name: string;
     Checked: boolean;
 }
-
-const emptyBoard:Board = {
-    ID: 0,
-    Name: "",
-    Columns: [],
-}
-
-export const [curBoard, setCurBoard] = createStore<Board>(emptyBoard);

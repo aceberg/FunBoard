@@ -1,10 +1,10 @@
 import { createEffect, createSignal, For } from "solid-js";
 import Modal from "../All/Modal";
-import { apiBoardGetByID, apiCardDel, apiCardEdit } from "../../utils/api";
-import { curBoard, setCurBoard } from "../../utils/exports";
 import { defaultThemes, getCardClass } from "../../utils/theme-card";
 import Dropdown from "../All/Dropdown";
 import Subtasks from "./Subtasks";
+import { deleteCard, updateCard } from "../../utils/store";
+import AddSubtask from "./AddSubtask";
 
 export default function ModalCard(_props: any) {
 
@@ -24,10 +24,8 @@ export default function ModalCard(_props: any) {
       card.ColumnID = _props.id;
       
       console.log("Edit Card:", card);
-      await apiCardEdit(card);
-      setTimeout(async () => {
-        setCurBoard(await apiBoardGetByID(curBoard.ID));
-      }, 100); // 0.1 second
+      
+      updateCard(card);
     }
   }
 
@@ -43,10 +41,8 @@ export default function ModalCard(_props: any) {
   };
 
   const handleDel = async () => {
-    await apiCardDel(_props.card.ID);
-    setTimeout(async () => {
-      setCurBoard(await apiBoardGetByID(curBoard.ID));
-    }, 100); // 0.1 second
+    deleteCard(_props.card);
+    _props.setIsOpen(false);
   };
 
   const resizeTextarea = () => {
@@ -91,6 +87,7 @@ export default function ModalCard(_props: any) {
           </Dropdown>
         </div>
 
+        <AddSubtask cardID={_props.card.ID} colID={_props.id}></AddSubtask>
         <Subtasks card={_props.card}></Subtasks>
         
         <hr class="mt-2 mb-1 border-t border-dashed"></hr>

@@ -222,6 +222,29 @@ paths:
       summary: Edit or add Card
       tags:
       - card
+  /api/card/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get Card by ID
+      parameters:
+      - description: Card ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Card'
+        "404":
+          description: Not Found
+      summary: Get Card by ID
+      tags:
+      - card
   /api/card/del/{id}:
     get:
       consumes:
@@ -267,6 +290,29 @@ paths:
         "404":
           description: Not Found
       summary: Edit or add Column
+      tags:
+      - column
+  /api/column/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get Column by ID
+      parameters:
+      - description: Column ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Column'
+        "404":
+          description: Not Found
+      summary: Get Column by ID
       tags:
       - column
   /api/column/del/{id}:

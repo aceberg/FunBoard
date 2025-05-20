@@ -1,7 +1,7 @@
 import { createSignal } from "solid-js";
 import Modal from "../All/Modal";
-import { ColumnProps, curBoard, setCurBoard } from "../../utils/exports";
-import { apiBoardGetByID, apiColumnPropsEdit } from "../../utils/api";
+import { ColumnProps } from "../../utils/exports";
+import { updateColumnProps } from "../../utils/store";
 
 export default function SettingsModal(_props: any) {
   let changed = false;
@@ -17,9 +17,8 @@ export default function SettingsModal(_props: any) {
         ...prev,
         ColumnID: _props.id,
       }));
-      // console.log(JSON.stringify(colProps(), null, 2));
-      await apiColumnPropsEdit(colProps());
-      setCurBoard(await apiBoardGetByID(curBoard.ID));
+      
+      updateColumnProps(colProps());
     }
   }
 

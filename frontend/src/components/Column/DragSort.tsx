@@ -1,17 +1,16 @@
 import { For } from "solid-js"
 import { useDragAndDrop } from "@formkit/drag-and-drop/solid";
-import { apiBoardGetByID, apiCardEdit } from "../../utils/api";
-import { Card, curBoard, setCurBoard } from "../../utils/exports";
+import { Card } from "../../utils/exports";
 import OneCard from "../Card/OneCard";
 import { sortCards } from "../../utils/sort";
 import { state } from "@formkit/drag-and-drop";
+import { updateCard } from "../../utils/store";
 
 
 export default function DragSort(_props: any) {
 
   let cards = sortCards([..._props.col.Cards]);
   let editTrigger = false;
-  let getBoardTrigger = false;
 
   const [backList, backs] = useDragAndDrop<HTMLDivElement, Card>(
     cards,
@@ -31,14 +30,14 @@ export default function DragSort(_props: any) {
 
   const onDragEnded = () => {
     if (editTrigger) {
-      updateCards();
+      updCards();
     }
     editTrigger = false;
   }
 
   state.on("dragEnded", onDragEnded);
 
-  const updateCards = async () => {
+  const updCards = async () => {
     for (let i=0; i< cards.length; i++) {
       let card = { ...cards[i]};
       card.Sort = i;
@@ -46,24 +45,19 @@ export default function DragSort(_props: any) {
 
       if ((card.Sort !== cards[i].Sort) || (card.ColumnID !== cards[i].ColumnID)) {
         // console.log("Edited", card.Name);
-        getBoardTrigger = true;
-        await apiCardEdit(card);
+     
+        updateCard(card);
       }
-    }
-    if (getBoardTrigger) {
-      getBoardTrigger = false;
-      // console.log("API get");
-      setTimeout(async () => {
-        setCurBoard(await apiBoardGetByID(curBoard.ID));
-      }, 500); // 0.5 second
     }
   }
 
   return (
-    <div ref={backList} class="h-full overflow-auto">
-    <For each={backs()}>
-      {(back) => <OneCard card={back} conf={_props.col.Props}></OneCard>}
-    </For>
-    </div>
+    <>
+      <div ref={backList} class="h-full overflow-auto">
+      <For each={backs()}>
+        {(back) => <OneCard card={back} conf={_props.col.Props}></OneCard>}
+      </For>
+      </div>
+    </>
   )
 }

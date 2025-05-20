@@ -7,6 +7,15 @@ import (
 	"github.com/aceberg/FunBoard/internal/models"
 )
 
+// CardGetByID - get one Card
+func CardGetByID(id string) (card models.Card) {
+
+	err = db.Preload("Tasks").First(&card, id).Error
+	check.IfError(err)
+
+	return card
+}
+
 // CardDelete - delete Card by ID
 func CardDelete(id string) bool {
 

@@ -53,7 +53,7 @@ type Card struct {
 	Sort        uint      `json:"Sort"`
 	DateCreated string    `json:"DateCreated"`
 	DateMoved   string    `json:"DateMoved"`
-	Tasks       []Subtask `json:"Tasks" gorm:"foreignKey:CardID"`
+	Tasks       []Subtask `json:"Tasks" gorm:"foreignKey:CardID;"`
 }
 
 // Subtask - Card subtask
