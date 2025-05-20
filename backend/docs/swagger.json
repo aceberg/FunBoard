@@ -572,6 +572,9 @@
                 },
                 "ShowID": {
                     "type": "boolean"
+                },
+                "ShowSubtasks": {
+                    "type": "boolean"
                 }
             }
         },
@@ -598,16 +601,16 @@
         "models.Subtask": {
             "type": "object",
             "properties": {
+                "CardID": {
+                    "type": "integer"
+                },
                 "Checked": {
                     "type": "boolean"
-                },
-                "ColumnID": {
-                    "type": "integer"
                 },
                 "ID": {
                     "type": "integer"
                 },
-                "Task": {
+                "Name": {
                     "type": "string"
                 }
             }

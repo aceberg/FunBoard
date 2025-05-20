@@ -63,6 +63,16 @@ export default function SettingsModal(_props: any) {
         <label class="inline-flex items-center space-x-2 p-1 mt-2">
           <input
             type="checkbox"
+            name="ShowSubtasks"
+            class="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+            checked={colProps().ShowSubtasks}
+            onChange={handleChange}
+          />
+          <span>Show Subtasks</span>
+        </label><br></br>
+        <label class="inline-flex items-center space-x-2 p-1 mt-2">
+          <input
+            type="checkbox"
             name="ShowDateCr"
             class="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
             checked={colProps().ShowDateCr}

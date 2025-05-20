@@ -579,6 +579,9 @@ const docTemplate = `{
                 },
                 "ShowID": {
                     "type": "boolean"
+                },
+                "ShowSubtasks": {
+                    "type": "boolean"
                 }
             }
         },
@@ -605,16 +608,16 @@ const docTemplate = `{
         "models.Subtask": {
             "type": "object",
             "properties": {
+                "CardID": {
+                    "type": "integer"
+                },
                 "Checked": {
                     "type": "boolean"
-                },
-                "ColumnID": {
-                    "type": "integer"
                 },
                 "ID": {
                     "type": "integer"
                 },
-                "Task": {
+                "Name": {
                     "type": "string"
                 }
             }

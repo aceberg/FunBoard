@@ -42,6 +42,14 @@ export type ColumnProps = {
 	ShowID:      boolean;
 	ShowDateCr:  boolean;
 	ShowDateMv:  boolean;
+    ShowSubtasks: boolean;
+}
+
+export type Subtask = {
+    ID: number;
+    CardID: number;
+    Name: string;
+    Checked: boolean;
 }
 
 const emptyBoard:Board = {

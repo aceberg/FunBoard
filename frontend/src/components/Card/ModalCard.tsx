@@ -4,6 +4,7 @@ import { apiBoardGetByID, apiCardDel, apiCardEdit } from "../../utils/api";
 import { curBoard, setCurBoard } from "../../utils/exports";
 import { defaultThemes, getCardClass } from "../../utils/theme-card";
 import Dropdown from "../All/Dropdown";
+import Subtasks from "./Subtasks";
 
 export default function ModalCard(_props: any) {
 
@@ -89,6 +90,8 @@ export default function ModalCard(_props: any) {
             </For>
           </Dropdown>
         </div>
+
+        <Subtasks card={_props.card}></Subtasks>
         
         <hr class="mt-2 mb-1 border-t border-dashed"></hr>
         <div class="flex text-xs font-mono px-2">

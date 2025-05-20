@@ -1,4 +1,4 @@
-import { Card, Column, ColumnProps } from "./exports";
+import { Card, Column, ColumnProps, Subtask } from "./exports";
 
 export const apiPath = 'http://0.0.0.0:8857';
 
@@ -32,6 +32,21 @@ export const apiCardDel = async (id:number) => {
   const res = await (await fetch(url)).json();
 
   return res;
+};
+
+// Subtask
+export const apiSubtaskEdit = async (subtask: Subtask) => {
+  
+  const res = await fetch(apiPath+'/api/subtask', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(subtask),
+  });
+
+  const result: boolean = await res.json();
+  return result;
 };
 
 // COLUMN

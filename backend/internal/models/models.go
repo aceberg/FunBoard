@@ -35,12 +35,13 @@ type Column struct {
 
 // ColumnProps - settings for cards in Column
 type ColumnProps struct {
-	ID          uint `json:"ID" gorm:"primaryKey"`
-	ColumnID    uint `json:"ColumnID"`
-	GroupByDate bool `json:"GroupByDate"`
-	ShowID      bool `json:"ShowID"`
-	ShowDateCr  bool `json:"ShowDateCr"`
-	ShowDateMv  bool `json:"ShowDateMv"`
+	ID           uint `json:"ID" gorm:"primaryKey"`
+	ColumnID     uint `json:"ColumnID"`
+	GroupByDate  bool `json:"GroupByDate"`
+	ShowID       bool `json:"ShowID"`
+	ShowDateCr   bool `json:"ShowDateCr"`
+	ShowDateMv   bool `json:"ShowDateMv"`
+	ShowSubtasks bool `json:"ShowSubtasks"`
 }
 
 // Card - one card
@@ -58,7 +59,7 @@ type Card struct {
 // Subtask - Card subtask
 type Subtask struct {
 	ID      uint   `json:"ID" gorm:"primaryKey"`
-	CardID  uint   `json:"ColumnID"`
-	Task    string `json:"Task"`
+	CardID  uint   `json:"CardID"`
+	Name    string `json:"Name"`
 	Checked bool   `json:"Checked"`
 }

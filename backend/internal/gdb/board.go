@@ -8,7 +8,7 @@ import (
 // BoardGetByID - get one board
 func BoardGetByID(id string) (board models.Board) {
 
-	err = db.Preload("Columns").Preload("Columns.Cards").Preload("Columns.Props").First(&board, id).Error
+	err = db.Preload("Columns").Preload("Columns.Cards").Preload("Columns.Props").Preload("Columns.Cards.Tasks").First(&board, id).Error
 	check.IfError(err)
 
 	return board

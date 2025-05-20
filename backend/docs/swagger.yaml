@@ -72,6 +72,8 @@ definitions:
         type: boolean
       ShowID:
         type: boolean
+      ShowSubtasks:
+        type: boolean
     type: object
   models.Conf:
     properties:
@@ -88,13 +90,13 @@ definitions:
     type: object
   models.Subtask:
     properties:
+      CardID:
+        type: integer
       Checked:
         type: boolean
-      ColumnID:
-        type: integer
       ID:
         type: integer
-      Task:
+      Name:
         type: string
     type: object
 info:
