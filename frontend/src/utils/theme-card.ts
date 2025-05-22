@@ -16,83 +16,83 @@ export function getCardClass(color: keyof typeof colorClasses) {
 
 const colorClasses = {
     red: {
-        bg: "bg-red-100",
-        border: "border-red-300",
-        text: "text-red-800"
+        bg: "bg-red-200",
+        border: "border-red-400",
+        text: "text-red-900"
     },
     orange: {
-        bg: "bg-orange-100",
-        border: "border-orange-300",
-        text: "text-orange-800"
+        bg: "bg-orange-200",
+        border: "border-orange-400",
+        text: "text-orange-900"
     },
     amber: {
-        bg: "bg-amber-100",
-        border: "border-amber-300",
-        text: "text-amber-800"
+        bg: "bg-amber-200",
+        border: "border-amber-400",
+        text: "text-amber-900"
     },
     yellow: {
-        bg: "bg-yellow-100",
-        border: "border-yellow-300",
-        text: "text-yellow-800"
+        bg: "bg-yellow-200",
+        border: "border-yellow-400",
+        text: "text-yellow-900"
     },
     lime: {
-        bg: "bg-lime-100",
-        border: "border-lime-300",
-        text: "text-lime-800"
+        bg: "bg-lime-200",
+        border: "border-lime-400",
+        text: "text-lime-900"
     },
     green: {
-        bg: "bg-green-100",
-        border: "border-green-300",
-        text: "text-green-800"
+        bg: "bg-green-200",
+        border: "border-green-400",
+        text: "text-green-900"
     },
     emerald: {
-        bg: "bg-emerald-100",
-        border: "border-emerald-300",
-        text: "text-emerald-800"
+        bg: "bg-emerald-200",
+        border: "border-emerald-400",
+        text: "text-emerald-900"
     },
     teal: {
-        bg: "bg-teal-100",
-        border: "border-teal-300",
-        text: "text-teal-800"
+        bg: "bg-teal-200",
+        border: "border-teal-400",
+        text: "text-teal-900"
     },
     cyan: {
-        bg: "bg-cyan-100",
-        border: "border-cyan-300",
-        text: "text-cyan-800"
+        bg: "bg-cyan-200",
+        border: "border-cyan-400",
+        text: "text-cyan-900"
     },
     sky: {
-        bg: "bg-sky-100",
-        border: "border-sky-300",
-        text: "text-sky-800"
+        bg: "bg-sky-200",
+        border: "border-sky-400",
+        text: "text-sky-900"
     },
     blue: {
-        bg: "bg-blue-100",
-        border: "border-blue-300",
-        text: "text-blue-800"
+        bg: "bg-blue-200",
+        border: "border-blue-400",
+        text: "text-blue-900"
     },
     indigo: {
-        bg: "bg-indigo-100",
-        border: "border-indigo-300",
-        text: "text-indigo-800"
+        bg: "bg-indigo-200",
+        border: "border-indigo-400",
+        text: "text-indigo-900"
     },
     violet: {
-        bg: "bg-violet-100",
-        border: "border-violet-300",
-        text: "text-violet-800"
+        bg: "bg-violet-200",
+        border: "border-violet-400",
+        text: "text-violet-900"
     },
     purple: {
-        bg: "bg-purple-100",
-        border: "border-purple-300",
-        text: "text-purple-800"
+        bg: "bg-purple-200",
+        border: "border-purple-400",
+        text: "text-purple-900"
     },
     fuchsia: {
-        bg: "bg-fuchsia-100",
-        border: "border-fuchsia-300",
-        text: "text-fuchsia-800"
+        bg: "bg-fuchsia-200",
+        border: "border-fuchsia-400",
+        text: "text-fuchsia-900"
     },
     pink: {
-        bg: "bg-pink-100",
-        border: "border-pink-300",
-        text: "text-pink-800"
+        bg: "bg-pink-200",
+        border: "border-pink-400",
+        text: "text-pink-900"
     },
 };

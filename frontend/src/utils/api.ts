@@ -1,4 +1,4 @@
-import { Card, Column, ColumnProps, Subtask } from "./exports";
+import { Board, Card, Column, ColumnProps, Subtask } from "./exports";
 
 export const apiPath = 'http://0.0.0.0:8857';
 
@@ -9,6 +9,28 @@ export const apiBoardGetByID = async (id:number) => {
   const res = await (await fetch(url)).json();
 
   return res;
+};
+
+export const apiBoardGetAll = async () => {
+
+  const url = apiPath+'/api/boards';
+  const res = await (await fetch(url)).json();
+
+  return res;
+};
+
+export const apiBoardEdit = async (board: Board) => {
+  
+  const res = await fetch(apiPath+'/api/board', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(board),
+  });
+
+  const result: boolean = await res.json();
+  return result;
 };
 
 // CARD

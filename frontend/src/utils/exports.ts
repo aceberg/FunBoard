@@ -27,6 +27,7 @@ export type Column = {
     Name: string;
     Cards: Card[];
     Fold: boolean;
+    Sort: number;
     Props: ColumnProps;
 };
 
@@ -34,6 +35,11 @@ export type Board = {
 	ID:   number;
     Name: string;
     Columns: Column[];
+};
+
+export type BoardInfo = {
+	ID:   number;
+    Name: string;
 };
 
 export type ColumnProps = {

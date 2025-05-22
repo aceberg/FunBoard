@@ -3,7 +3,7 @@ import { apiColumnEdit } from "../../utils/api";
 
 import AddCard from "../Card/AddCard";
 import DragSort from "./DragSort";
-import SettingsModal from "./SettingsModal";
+import SettingsModal from "./Settings/SettingsModal";
 
 
 export default function OneColumn(_props: any) {
@@ -36,7 +36,7 @@ export default function OneColumn(_props: any) {
             <span class="text-sm font-light">{_props.col.Cards.length}</span>
           </div>
           
-          <SettingsModal conf={_props.col.Props} id={_props.col.ID}></SettingsModal>
+          <SettingsModal col={_props.col}></SettingsModal>
         </div>
           <DragSort col={_props.col}></DragSort>
         </>
