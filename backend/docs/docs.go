@@ -672,6 +672,9 @@ const docTemplate = `{
                 },
                 "Port": {
                     "type": "string"
+                },
+                "UsersPath": {
+                    "type": "string"
                 }
             }
         },

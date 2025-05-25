@@ -2,11 +2,20 @@ package models
 
 // Conf - web gui config
 type Conf struct {
-	Host     string `json:"Host"`
-	Port     string `json:"Port"`
-	DirPath  string `json:"DirPath"`
-	ConfPath string `json:"ConfPath"`
-	DBPath   string `json:"DBPath"`
+	Host      string `json:"Host"`
+	Port      string `json:"Port"`
+	DirPath   string `json:"DirPath"`
+	ConfPath  string `json:"ConfPath"`
+	UsersPath string `json:"UsersPath"`
+	DBPath    string `json:"DBPath"`
+}
+
+// User - Board user
+type User struct {
+	Password    string `yaml:"password"`
+	Admin       bool   `yaml:"admin"`
+	BoardsRead  []int  `yaml:"boards_read"`
+	BoardsWrite []int  `yaml:"boards_write"`
 }
 
 // Board - one board
