@@ -18,3 +18,7 @@ check: fmt lint
 
 swag:
 	swag init --parseInternal
+
+# can be yaml, xml, db; add -w to write to file
+tags: 
+	gomodifytags -file internal/models/models.go -all -add-tags json

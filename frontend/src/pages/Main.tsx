@@ -1,13 +1,16 @@
-import Table from "../components/Table"
+import Table from "../components/Table/Table"
+import TableConf from "../components/Table/TableConf"
+import { showBoardConf } from "../utils/exports"
 
 
 function Main() {
 
   return (
     <>
-      <div class="p-1 flex-1 h-full overflow-x-hidden">
-        <Table></Table>
-      </div>
+      {showBoardConf()
+        ? <TableConf></TableConf>
+        : <Table></Table>
+      }
     </>
   )
 }

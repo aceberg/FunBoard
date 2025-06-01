@@ -1,3 +1,7 @@
+import { createSignal } from "solid-js";
+
+export const [showBoardConf, setShowBoardConf] = createSignal(false);
+
 export type Card = {
     ID: number;
     Name: string;

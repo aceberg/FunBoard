@@ -1,14 +1,20 @@
 import AddBoard from "../components/Header/AddBoard"
 import { curBoard } from "../utils/store"
 import ListBoards from "../components/Header/ListBoards";
+import { setShowBoardConf, showBoardConf } from "../utils/exports";
 
 function Header() {
+
+  const handleBoardConf = () => {
+    setShowBoardConf(!showBoardConf());
+  }
 
   return (
     <>
       <div class="flex">
         <ListBoards></ListBoards>
-        <div class='text-text1 text-lg px-4'>{curBoard.Name}</div>
+        <div class='text-text1 text-lg px-4 p-1'>{curBoard.Name}</div>
+        <i class="bi bi-pencil text-gray-500 hover:text-gray-700 p-1" onClick={handleBoardConf}></i>
         <AddBoard></AddBoard>
       </div>
     </>
