@@ -1,5 +1,5 @@
 import Table from "../components/Table/Table"
-import TableConf from "../components/Table/TableConf"
+import TableConf from "../components/Table/Config/TableConf"
 import { showBoardConf } from "../utils/exports"
 
 
