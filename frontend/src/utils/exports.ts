@@ -28,12 +28,23 @@ export const emptyCard:Card = {
 
 export type Column = {
     ID: number;
+    BoardID: number;
     Name: string;
     Cards: Card[];
     Fold: boolean;
     Sort: number;
     Props: ColumnProps;
 };
+
+export const emptyColumn:Column = {
+    ID: 0,
+    BoardID: 0,
+    Name: "",
+    Cards: [],
+    Fold: false,
+    Sort: 0,
+    Props: {} as ColumnProps,
+}
 
 export type Board = {
 	ID:   number;
