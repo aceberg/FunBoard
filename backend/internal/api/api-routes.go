@@ -5,6 +5,7 @@ import (
 	fiberSwagger "github.com/swaggo/fiber-swagger"
 
 	"github.com/aceberg/FunBoard/internal/models"
+	"github.com/aceberg/FunBoard/internal/users"
 
 	// Swagger
 	_ "github.com/aceberg/FunBoard/docs"
@@ -16,6 +17,8 @@ var appConfig models.Conf
 func Routes(app *fiber.App, conf *models.Conf) {
 
 	appConfig = *conf
+
+	users.Start(appConfig.UsersPath)
 
 	// config.go
 	app.Get("/api/conf", getConfig)

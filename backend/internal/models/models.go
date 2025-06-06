@@ -14,8 +14,8 @@ type Conf struct {
 type User struct {
 	Password    string `yaml:"password"`
 	Admin       bool   `yaml:"admin"`
-	BoardsRead  []int  `yaml:"boards_read"`
-	BoardsWrite []int  `yaml:"boards_write"`
+	BoardsRead  []uint `yaml:"boards_read"`
+	BoardsWrite []uint `yaml:"boards_write"`
 }
 
 // Board - one board

@@ -1,11 +1,14 @@
 package api
 
 import (
+	"strconv"
+
 	"github.com/gofiber/fiber/v2"
 
 	"github.com/aceberg/FunBoard/internal/check"
 	"github.com/aceberg/FunBoard/internal/gdb"
 	"github.com/aceberg/FunBoard/internal/models"
+	"github.com/aceberg/FunBoard/internal/users"
 )
 
 // boardGetByID godoc
@@ -22,10 +25,14 @@ func boardGetByID(c *fiber.Ctx) error {
 
 	idStr := c.Params("id")
 	// log.Println("Getting Board", idStr)
+	id, _ := strconv.ParseUint(idStr, 10, 32)
 
-	board := gdb.BoardGetByID(idStr)
+	if users.CheckRead(c, uint(id)) {
+		board := gdb.BoardGetByID(idStr)
+		return c.JSON(board)
+	}
 
-	return c.JSON(board)
+	return c.JSON("Unauthorised")
 }
 
 // boardsGetAll godoc
@@ -38,10 +45,17 @@ func boardGetByID(c *fiber.Ctx) error {
 // @Failure      404
 // @Router       /api/boards [get]
 func boardsGetAll(c *fiber.Ctx) error {
+	var allowedBoards []models.BoardInfo
 
 	boards := gdb.BoardsGetAll()
 
-	return c.JSON(boards)
+	for _, b := range boards {
+		if users.CheckRead(c, b.ID) {
+			allowedBoards = append(allowedBoards, b)
+		}
+	}
+
+	return c.JSON(allowedBoards)
 }
 
 // boardEdit godoc
@@ -61,10 +75,12 @@ func boardEdit(c *fiber.Ctx) error {
 	check.IfError(err)
 
 	// log.Println("Edit Board", board)
+	if users.CheckWrite(c, board.ID) {
+		ok := gdb.BoardEdit(board)
+		return c.JSON(ok)
+	}
 
-	ok := gdb.BoardEdit(board)
-
-	return c.JSON(ok)
+	return c.JSON(false)
 }
 
 // boardDelete godoc
@@ -81,8 +97,11 @@ func boardDelete(c *fiber.Ctx) error {
 
 	idStr := c.Params("id")
 	// log.Println("Delete Board", idStr)
+	id, _ := strconv.ParseUint(idStr, 10, 32)
 
-	ok := gdb.BoardDelete(idStr)
-
-	return c.JSON(ok)
+	if users.CheckWrite(c, uint(id)) {
+		ok := gdb.BoardDelete(idStr)
+		return c.JSON(ok)
+	}
+	return c.JSON(false)
 }

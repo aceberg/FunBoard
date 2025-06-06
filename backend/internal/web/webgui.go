@@ -16,7 +16,6 @@ import (
 	"github.com/aceberg/FunBoard/internal/conf"
 	"github.com/aceberg/FunBoard/internal/gdb"
 	"github.com/aceberg/FunBoard/internal/models"
-	"github.com/aceberg/FunBoard/internal/users"
 )
 
 var (
@@ -44,7 +43,6 @@ func Gui(dirPath string) {
 
 	appConfig.UsersPath = dirPath + "/users.yaml"
 	check.Path(appConfig.UsersPath)
-	users.Start(appConfig.UsersPath)
 
 	log.Println("INFO: starting web gui with config", appConfig.ConfPath)
 
