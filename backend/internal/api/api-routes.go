@@ -20,30 +20,36 @@ func Routes(app *fiber.App, conf *models.Conf) {
 
 	users.Start(appConfig.UsersPath)
 
+	// auth
+	app.Post("/login", users.Login)
+	app.Post("/logout", users.Logout)
+
+	api := app.Group("/api", users.RequireAuth)
+
 	// config.go
-	app.Get("/api/conf", getConfig)
-	app.Post("/api/conf", saveConf)
+	api.Get("/conf", getConfig)
+	api.Post("/conf", saveConf)
 
 	// board.go
-	app.Get("/api/boards", boardsGetAll)
-	app.Get("/api/board/:id", boardGetByID)
-	app.Get("/api/board/del/:id", boardDelete)
-	app.Post("/api/board", boardEdit)
+	api.Get("/boards", boardsGetAll)
+	api.Get("/board/:id", boardGetByID)
+	api.Get("/board/del/:id", boardDelete)
+	api.Post("/board", boardEdit)
 
 	// card.go
-	app.Get("/api/card/:id", cardGetByID)
-	app.Get("/api/card/del/:id", cardDelete)
-	app.Post("/api/card", cardEdit)
+	api.Get("/card/:id", cardGetByID)
+	api.Get("/card/del/:id", cardDelete)
+	api.Post("/card", cardEdit)
 
 	// subtask.go
-	app.Get("/api/subtask/del/:id", subtaskDelete)
-	app.Post("/api/subtask", subtaskEdit)
+	api.Get("/subtask/del/:id", subtaskDelete)
+	api.Post("/subtask", subtaskEdit)
 
 	// column.go
-	app.Get("/api/column/:id", columnGetByID)
-	app.Get("/api/column/del/:id", columnDelete)
-	app.Post("/api/column", columnEdit)
-	app.Post("/api/column/props", columnPropsEdit)
+	api.Get("/column/:id", columnGetByID)
+	api.Get("/column/del/:id", columnDelete)
+	api.Post("/column", columnEdit)
+	api.Post("/column/props", columnPropsEdit)
 
 	// swagger
 	app.Get("/swagger/*", fiberSwagger.WrapHandler)

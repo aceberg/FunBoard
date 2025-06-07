@@ -2,6 +2,21 @@ import { Board, Card, Column, ColumnProps, Subtask } from "./exports";
 
 export const apiPath = 'http://0.0.0.0:8857';
 
+// LOGIN
+export const apiLogin = async (username: string, password: string) => {
+  
+  const res = await fetch(apiPath+'/login', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({username, password}),
+  });
+
+  const result: boolean = await res.json();
+  return result;
+};
+
 // BOARD
 export const apiBoardGetByID = async (id:number) => {
 

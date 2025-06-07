@@ -1,10 +1,15 @@
 package api
 
 import (
+	"fmt"
+	"log"
+
+	"github.com/gofiber/fiber/v2"
+
 	"github.com/aceberg/FunBoard/internal/check"
 	"github.com/aceberg/FunBoard/internal/gdb"
 	"github.com/aceberg/FunBoard/internal/models"
-	"github.com/gofiber/fiber/v2"
+	"github.com/aceberg/FunBoard/internal/users"
 )
 
 // columnDelete godoc
@@ -18,11 +23,15 @@ import (
 // @Failure      404
 // @Router       /api/column/del/{id} [get]
 func columnDelete(c *fiber.Ctx) error {
+	var ok bool
 
 	idStr := c.Params("id")
 	// log.Println("Delete Column", idStr)
 
-	ok := gdb.ColumnDelete(idStr)
+	column := gdb.ColumnGetByID(idStr)
+	if users.CheckPerm(c, column.BoardID, "write") {
+		ok = gdb.ColumnDelete(idStr)
+	}
 
 	return c.JSON(ok)
 }
@@ -42,8 +51,11 @@ func columnGetByID(c *fiber.Ctx) error {
 	idStr := c.Params("id")
 
 	column := gdb.ColumnGetByID(idStr)
+	if users.CheckPerm(c, column.BoardID, "read") {
+		return c.JSON(column)
+	}
 
-	return c.JSON(column)
+	return c.JSON(false)
 }
 
 // columnEdit godoc
@@ -58,13 +70,15 @@ func columnGetByID(c *fiber.Ctx) error {
 // @Router       /api/column [post]
 func columnEdit(c *fiber.Ctx) error {
 	var column models.Column
+	var ok bool
 
 	err := c.BodyParser(&column)
 	check.IfError(err)
 
 	// log.Println("Edit Column", column)
-
-	ok := gdb.ColumnEdit(column)
+	if users.CheckPerm(c, column.BoardID, "write") {
+		ok = gdb.ColumnEdit(column)
+	}
 
 	return c.JSON(ok)
 }
@@ -81,13 +95,17 @@ func columnEdit(c *fiber.Ctx) error {
 // @Router       /api/column/props [post]
 func columnPropsEdit(c *fiber.Ctx) error {
 	var props models.ColumnProps
+	var ok bool
 
 	err := c.BodyParser(&props)
 	check.IfError(err)
 
-	// log.Println("Edit Column Props", props)
+	log.Println("Edit Column Props", props)
 
-	ok := gdb.ColumnPropsEdit(props)
+	column := gdb.ColumnGetByID(fmt.Sprintf("%d", props.ColumnID))
+	if users.CheckPerm(c, column.BoardID, "write") {
+		ok = gdb.ColumnPropsEdit(props)
+	}
 
 	return c.JSON(ok)
 }

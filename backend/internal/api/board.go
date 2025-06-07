@@ -27,7 +27,7 @@ func boardGetByID(c *fiber.Ctx) error {
 	// log.Println("Getting Board", idStr)
 	id, _ := strconv.ParseUint(idStr, 10, 32)
 
-	if users.CheckRead(c, uint(id)) {
+	if users.CheckPerm(c, uint(id), "read") {
 		board := gdb.BoardGetByID(idStr)
 		return c.JSON(board)
 	}
@@ -50,7 +50,7 @@ func boardsGetAll(c *fiber.Ctx) error {
 	boards := gdb.BoardsGetAll()
 
 	for _, b := range boards {
-		if users.CheckRead(c, b.ID) {
+		if users.CheckPerm(c, b.ID, "read") {
 			allowedBoards = append(allowedBoards, b)
 		}
 	}
@@ -75,7 +75,7 @@ func boardEdit(c *fiber.Ctx) error {
 	check.IfError(err)
 
 	// log.Println("Edit Board", board)
-	if users.CheckWrite(c, board.ID) {
+	if users.CheckPerm(c, board.ID, "write") {
 		ok := gdb.BoardEdit(board)
 		return c.JSON(ok)
 	}
@@ -99,7 +99,7 @@ func boardDelete(c *fiber.Ctx) error {
 	// log.Println("Delete Board", idStr)
 	id, _ := strconv.ParseUint(idStr, 10, 32)
 
-	if users.CheckWrite(c, uint(id)) {
+	if users.CheckPerm(c, uint(id), "write") {
 		ok := gdb.BoardDelete(idStr)
 		return c.JSON(ok)
 	}

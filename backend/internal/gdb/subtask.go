@@ -18,3 +18,12 @@ func SubtaskEdit(subtask models.Subtask) bool {
 	err = db.Save(&subtask).Error
 	return !check.IfError(err)
 }
+
+// SubtaskGetByID - get one Subtask
+func SubtaskGetByID(id string) (subtask models.Subtask) {
+
+	err = db.First(&subtask, id).Error
+	check.IfError(err)
+
+	return subtask
+}

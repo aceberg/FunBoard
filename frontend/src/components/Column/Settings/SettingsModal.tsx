@@ -18,7 +18,7 @@ export default function SettingsModal(_props: any) {
       body={<div class="p-1">
         <div class="font-bold p-1">Column settings</div>
         <hr></hr>
-        <EditProps conf={_props.col.Props}></EditProps>
+        <EditProps conf={_props.col.Props} id={_props.col.ID}></EditProps>
       </div>
       }
       modalClass={cardTheme}

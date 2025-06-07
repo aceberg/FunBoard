@@ -1,11 +1,14 @@
 package api
 
 import (
+	"fmt"
+
 	"github.com/gofiber/fiber/v2"
 
 	"github.com/aceberg/FunBoard/internal/check"
 	"github.com/aceberg/FunBoard/internal/gdb"
 	"github.com/aceberg/FunBoard/internal/models"
+	"github.com/aceberg/FunBoard/internal/users"
 )
 
 // subtaskDelete godoc
@@ -19,11 +22,16 @@ import (
 // @Failure      404
 // @Router       /api/subtask/del/{id} [get]
 func subtaskDelete(c *fiber.Ctx) error {
+	var ok bool
 
 	idStr := c.Params("id")
 	// log.Println("Delete Card", idStr)
-
-	ok := gdb.SubtaskDelete(idStr)
+	subtask := gdb.SubtaskGetByID(idStr)
+	card := gdb.CardGetByID(fmt.Sprintf("%d", subtask.CardID))
+	column := gdb.ColumnGetByID(fmt.Sprintf("%d", card.ColumnID))
+	if users.CheckPerm(c, column.BoardID, "write") {
+		ok = gdb.SubtaskDelete(idStr)
+	}
 
 	return c.JSON(ok)
 }
@@ -40,13 +48,17 @@ func subtaskDelete(c *fiber.Ctx) error {
 // @Router       /api/subtask [post]
 func subtaskEdit(c *fiber.Ctx) error {
 	var subtask models.Subtask
+	var ok bool
 
 	err := c.BodyParser(&subtask)
 	check.IfError(err)
 
 	// log.Println("Edit Card", card)
-
-	ok := gdb.SubtaskEdit(subtask)
+	card := gdb.CardGetByID(fmt.Sprintf("%d", subtask.CardID))
+	column := gdb.ColumnGetByID(fmt.Sprintf("%d", card.ColumnID))
+	if users.CheckPerm(c, column.BoardID, "write") {
+		ok = gdb.SubtaskEdit(subtask)
+	}
 
 	return c.JSON(ok)
 }

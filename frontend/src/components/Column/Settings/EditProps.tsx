@@ -11,6 +11,7 @@ export default function EditProps(_props: any) {
     setColProps(prev => ({
       ...prev,
       [name]: checked,
+      "ColumnID": _props.id,
     }));
     
     updateColumnProps(colProps());

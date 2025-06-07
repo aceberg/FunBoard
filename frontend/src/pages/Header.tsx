@@ -2,6 +2,7 @@ import AddBoard from "../components/Header/AddBoard"
 import { curBoard } from "../utils/store"
 import ListBoards from "../components/Header/ListBoards";
 import { setShowBoardConf, showBoardConf } from "../utils/exports";
+import Login from "../components/Header/Login";
 
 function Header() {
 
@@ -16,6 +17,9 @@ function Header() {
         <div class='text-text1 text-lg px-4 p-1'>{curBoard.Name}</div>
         <i class="bi bi-pencil text-gray-500 hover:text-gray-700 p-1" onClick={handleBoardConf}></i>
         <AddBoard></AddBoard>
+        <div class="ml-auto">
+          <Login></Login>
+        </div>
       </div>
     </>
   )
