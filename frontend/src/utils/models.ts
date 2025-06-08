@@ -1,7 +1,3 @@
-import { createSignal } from "solid-js";
-
-export const [showBoardConf, setShowBoardConf] = createSignal(false);
-
 export type Card = {
     ID: number;
     Name: string;
@@ -14,18 +10,6 @@ export type Card = {
     Tasks: Subtask[];
 };
 
-export const emptyCard:Card = {
-    ID: 0,
-    Name: "",
-    ColumnID: 0,
-    Theme: "",
-    Sort: 0,
-    DateCreated: "",
-    DateUpdated: "",
-    DateMoved: "",
-    Tasks: []
-};
-
 export type Column = {
     ID: number;
     BoardID: number;
@@ -35,16 +19,6 @@ export type Column = {
     Sort: number;
     Props: ColumnProps;
 };
-
-export const emptyColumn:Column = {
-    ID: 0,
-    BoardID: 0,
-    Name: "",
-    Cards: [],
-    Fold: false,
-    Sort: 0,
-    Props: {} as ColumnProps,
-}
 
 export type Board = {
 	ID:   number;

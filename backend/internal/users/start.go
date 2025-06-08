@@ -22,6 +22,7 @@ func Start(path string) {
 	if len(allUsers) > 0 {
 		Enabled = true
 	}
+	Enabled = false // for dev
 }
 
 // CheckPerm - check if this user allowed to read/write this board

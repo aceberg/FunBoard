@@ -1,4 +1,4 @@
-import { Card } from "./exports";
+import { Card } from "./models";
 
 export function sortCards(cards: Card[]) {
 

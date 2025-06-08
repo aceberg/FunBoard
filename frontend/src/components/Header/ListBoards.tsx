@@ -1,20 +1,21 @@
 import { createSignal, For } from "solid-js";
-import { BoardInfo } from "../../utils/exports";
-import { apiBoardGetAll, apiBoardGetByID } from "../../utils/api";
-import { setCurBoard } from "../../utils/store";
+import { BoardInfo } from "../../utils/models";
+import { apiBoardGetAll } from "../../utils/api";
 import Dropdown from "../All/Dropdown";
+import { useNavigate } from "@solidjs/router";
 
 
 export default function ListBoards() {
 
   const [boards, setBoards] = createSignal<BoardInfo[]>([]);
+  const navigate = useNavigate();
 
   const handleBoards = async () => {
     setBoards(await apiBoardGetAll());
   }
 
-  const handleLoadBoard = async (id: number) => {
-    setCurBoard(await apiBoardGetByID(id));
+  const handleLoadBoard = (id: number) => {
+    navigate("/board/"+id);
   }
 
   return (

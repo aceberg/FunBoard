@@ -1,18 +1,39 @@
 import Table from "../components/Table/Table"
 import TableConf from "../components/Table/Config/TableConf"
-import { showBoardConf } from "../utils/exports"
+import Header from "./Header"
+import { useParams } from "@solidjs/router";
+import { setCurBoard } from "../utils/store";
+import { apiBoardGetByID } from "../utils/api";
+import { showBoardConf } from "../utils/signals";
+import { createEffect } from "solid-js";
 
 
-function Main() {
+export default function Main() {
+
+  const params = useParams();
 
   return (
     <>
-      {showBoardConf()
-        ? <TableConf></TableConf>
-        : <Table></Table>
-      }
+    <div class='flex flex-col h-screen'>
+      <Header></Header>
+      <ChangeBoard id={params.id}></ChangeBoard>
+    </div>
     </>
   )
 }
 
-export default Main
+function ChangeBoard(_props: any) {
+
+  createEffect(async ()=>{
+    setCurBoard(await apiBoardGetByID(_props.id));
+  }, _props.id);
+
+  return (
+    <>
+    {showBoardConf()
+      ? <TableConf></TableConf>
+      : <Table></Table>
+    }
+    </>
+  )
+}

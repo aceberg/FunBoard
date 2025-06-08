@@ -1,5 +1,5 @@
 import { createSignal } from "solid-js";
-import { ColumnProps } from "../../../utils/exports";
+import { ColumnProps } from "../../../utils/models";
 import { updateColumnProps } from "../../../utils/store";
 
 export default function EditProps(_props: any) {

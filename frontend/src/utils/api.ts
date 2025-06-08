@@ -1,4 +1,4 @@
-import { Board, Card, Column, ColumnProps, Subtask } from "./exports";
+import { Board, Card, Column, ColumnProps, Subtask } from "./models";
 
 export const apiPath = 'http://0.0.0.0:8857';
 
@@ -18,7 +18,7 @@ export const apiLogin = async (username: string, password: string) => {
 };
 
 // BOARD
-export const apiBoardGetByID = async (id:number) => {
+export const apiBoardGetByID = async (id:string) => {
 
   const url = apiPath+'/api/board/'+id;
   const res = await (await fetch(url)).json();

@@ -1,6 +1,6 @@
 import { createSignal } from "solid-js";
 import Modal from "../All/Modal";
-import { Board } from "../../utils/exports";
+import { Board } from "../../utils/models";
 import { apiBoardEdit } from "../../utils/api";
 
 

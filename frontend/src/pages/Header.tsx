@@ -1,8 +1,8 @@
 import AddBoard from "../components/Header/AddBoard"
 import { curBoard } from "../utils/store"
 import ListBoards from "../components/Header/ListBoards";
-import { setShowBoardConf, showBoardConf } from "../utils/exports";
 import Login from "../components/Header/Login";
+import { setShowBoardConf, showBoardConf } from "../utils/signals";
 
 function Header() {
 

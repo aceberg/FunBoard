@@ -1,26 +1,17 @@
 import './App.css'
-import Header from './pages/Header'
-import Main from './pages/Main'
-
 import "bootstrap-icons/font/bootstrap-icons.min.css";
-import { setCurBoard } from './utils/store';
-import { apiBoardGetByID } from './utils/api';
+import { Route, Router } from '@solidjs/router';
+import Main from './pages/Main'
+import StartPage from './pages/StartPage';
 
-function App() {
-
-  const atStart = async () => {
-    setCurBoard(await apiBoardGetByID(1));
-  }
-  atStart();
+export default function App() {
 
   return (
     <>
-      <div class='flex flex-col h-screen'>
-        <Header></Header>
-        <Main></Main>
-      </div>
+      <Router>
+        <Route path="/" component={StartPage}/>
+        <Route path="/board/:id" component={Main}/>
+      </Router>
     </>
   )
 }
-
-export default App

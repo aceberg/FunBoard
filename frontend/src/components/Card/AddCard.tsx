@@ -1,10 +1,9 @@
 import { createSignal } from "solid-js";
 
 import ModalCard from "./ModalCard";
-import { emptyCard } from "../../utils/exports";
+import { emptyCard } from "../../utils/empty";
 
-
-function AddCard(_props: any) {
+export default function AddCard(_props: any) {
 
   const [isOpen, setIsOpen] = createSignal(false);
 
@@ -30,4 +29,3 @@ function AddCard(_props: any) {
   )
 }
 
-export default AddCard

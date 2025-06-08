@@ -1,12 +1,7 @@
 import { createStore } from "solid-js/store";
-import { Board, Card, ColumnProps, Subtask } from "./exports";
+import { Board, Card, ColumnProps, Subtask } from "./models";
 import { apiBoardGetByID, apiCardDel, apiCardEdit, apiCardGetByID, apiColumnPropsEdit, apiSubtaskDel, apiSubtaskEdit } from "./api";
-
-const emptyBoard:Board = {
-  ID: 0,
-  Name: "",
-  Columns: [],
-}
+import { emptyBoard } from "./empty";
 
 export const [curBoard, setCurBoard] = createStore<Board>(emptyBoard);
 
@@ -35,14 +30,14 @@ export async function updateCard(card: Card) {
   await apiCardEdit(card);
   
   if (card.ID === 0) {
-    setCurBoard(await apiBoardGetByID(curBoard.ID));
+    setCurBoard(await apiBoardGetByID(curBoard.ID.toString()));
   }
 }
 
 export async function deleteCard(card: Card) {
   
   await apiCardDel(card.ID);
-  setCurBoard(await apiBoardGetByID(curBoard.ID));
+  setCurBoard(await apiBoardGetByID(curBoard.ID.toString()));
 }
 
 export async function updateSubtask(colID: number, task: Subtask) {

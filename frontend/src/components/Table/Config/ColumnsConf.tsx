@@ -1,8 +1,9 @@
 import { For } from "solid-js";
 import { curBoard, setCurBoard } from "../../../utils/store";
-import { Column, emptyColumn } from "../../../utils/exports";
+import { Column } from "../../../utils/models";
 import { createStore } from "solid-js/store";
 import { apiColumnDel, apiColumnEdit } from "../../../utils/api";
+import { emptyColumn } from "../../../utils/empty";
 
 export default function ColumnsConf() {
 

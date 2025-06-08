@@ -1,6 +1,6 @@
 import { For } from "solid-js"
 import { useDragAndDrop } from "@formkit/drag-and-drop/solid";
-import { Card } from "../../utils/exports";
+import { Card } from "../../utils/models";
 import OneCard from "../Card/OneCard";
 import { sortCards } from "../../utils/sort";
 import { state } from "@formkit/drag-and-drop";

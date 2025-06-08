@@ -1,5 +1,5 @@
 import { createSignal } from "solid-js";
-import { Subtask } from "../../utils/exports";
+import { Subtask } from "../../utils/models";
 import { updateSubtask } from "../../utils/store";
 
 
