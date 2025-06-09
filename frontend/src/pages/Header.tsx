@@ -14,8 +14,8 @@ function Header() {
     <>
       <div class="flex">
         <ListBoards></ListBoards>
-        <div class='text-text1 text-lg px-4 p-1'>{curBoard.Name}</div>
-        <i class="bi bi-pencil text-gray-500 hover:text-gray-700 p-1" onClick={handleBoardConf}></i>
+        <div class='text-text1 text-lg px-2 p-1'>{curBoard.Name}</div>
+        <i class="bi bi-pencil icon-btn" onClick={handleBoardConf} title="Edit Board"></i>
         <AddBoard></AddBoard>
         <div class="ml-auto">
           <Login></Login>

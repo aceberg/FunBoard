@@ -41,11 +41,11 @@ export default function AddBoard(_props: any) {
   return (<>
     <Modal
       isOpen={isOpen()}
-      body={<div class="p-1">
+      body={<div class="p-2 px-4">
         <input 
         value={boardName()}
         placeholder="New Board Name"
-        class="border rounded px-2"
+        class="my-input"
         onInput={handleInput}
         onKeyDown={handleKeyDown}
         ></input>
@@ -55,8 +55,8 @@ export default function AddBoard(_props: any) {
       onClose={closeModal}
     ></Modal>
       
-      <button class="ml-2 text-gray-500 hover:text-gray-700" onClick={() => setIsOpen(true)}>
-          <i class="bi bi-plus-circle-dotted"></i>
+      <button class="ml-2" onClick={() => setIsOpen(true)} title="Add Board">
+          <i class="bi bi-plus-circle-dotted icon-btn"></i>
       </button>
   </>)
 }

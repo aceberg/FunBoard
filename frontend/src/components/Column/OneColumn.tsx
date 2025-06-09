@@ -31,7 +31,7 @@ export default function OneColumn(_props: any) {
         <div class="border-b border-out p-2 flex items-center justify-between">
           <AddCard id={_props.col.ID}></AddCard>
 
-          <div class="text-center flex-1" onClick={handleFold}>
+          <div class="text-center flex-1" onClick={handleFold} title="Fold Column">
             <span class="font-bold pr-3">{_props.col.Name}</span>
             <span class="text-sm font-light">{_props.col.Cards.length}</span>
           </div>

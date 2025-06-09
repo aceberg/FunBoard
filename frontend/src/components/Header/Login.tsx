@@ -28,30 +28,32 @@ export default function Login() {
   return (<>
     <Modal
       isOpen={isOpen()}
-      body={<div class="p-1">
+      body={<div class="w-64 mx-auto"><div class="grid gap-2 w-20 p-2 px-4">
         <input 
         value={username()}
+        type="text"
         placeholder="Username"
-        class="border rounded px-2"
+        class="my-input"
         onInput={(e) => setUsername(e.target.value)}
         // onKeyDown={handleKeyDown}
         ></input>
         <input 
         value={password()}
+        type="password"
         placeholder="Password"
-        class="border rounded px-2"
+        class="my-input"
         onInput={(e) => setPassword(e.target.value)}
         // onKeyDown={handleKeyDown}
         ></input>
-        <button class="border p-1" onClick={handleLogin}>Login</button>
-      </div>
+        <button class="text-btn" onClick={handleLogin}>Login</button>
+      </div></div>
       }
       modalClass={cardTheme}
       onClose={() => setIsOpen(false)}
     ></Modal>
       
-      <button class="ml-2 text-gray-500 hover:text-gray-700" onClick={() => setIsOpen(true)}>
-          <i class="bi bi-plus-circle-dotted"></i>
+      <button class="ml-2" onClick={() => setIsOpen(true)}>
+          <i class="bi bi-plus-circle-dotted icon-btn"></i>
       </button>
   </>)
 }

@@ -25,9 +25,9 @@ export default function SettingsModal(_props: any) {
       onClose={closeModal}
     ></Modal>
       <button 
-        class="ml-2 text-gray-500 hover:text-gray-700" 
+        class="ml-2" title="Settings"
         onClick={() => setIsOpen(true)}>
-        <i class="bi bi-three-dots"></i>
+        <i class="bi bi-three-dots icon-btn"></i>
       </button>
   </>)
 }

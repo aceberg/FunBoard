@@ -22,7 +22,7 @@ func Routes(app *fiber.App, conf *models.Conf) {
 
 	// auth
 	app.Post("/login", users.Login)
-	app.Post("/logout", users.Logout)
+	app.Get("/logout", users.Logout)
 
 	api := app.Group("/api", users.RequireAuth)
 

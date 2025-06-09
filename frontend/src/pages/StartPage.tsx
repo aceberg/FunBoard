@@ -19,10 +19,10 @@ export default function StartPage() {
 
   return (
   <>
-    <div>
+    <div class="p-50">
       <For each={boards()}>
         {(board) => 
-        <div class="dd" onClick={() => handleLoadBoard(board.ID)}>{board.Name}</div>
+        <div class="dd-menu" onClick={() => handleLoadBoard(board.ID)}>{board.Name}</div>
         }
       </For>
     </div>

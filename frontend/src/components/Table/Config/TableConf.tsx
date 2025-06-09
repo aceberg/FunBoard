@@ -13,11 +13,12 @@ export default function TableConf() {
   };
 
   return (
-    <div class="text-text2 p-6">
-      <div class="flex">
-        <input type="text" value={name()}
+    <div class="p-6">
+      <h1 class="font-semibold text-text2">Board Name</h1>
+      <div class="flex gap-4">
+        <input type="text" value={name()} class="my-input"
           onInput={(e) => setName(e.currentTarget.value)}></input>
-        <button class="border p-1" onClick={saveName}>Save</button>
+        <button class="text-btn" onClick={saveName}>Save</button>
       </div>
       <ColumnsConf></ColumnsConf>
     </div>

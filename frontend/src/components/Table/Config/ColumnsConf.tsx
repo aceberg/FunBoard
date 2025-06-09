@@ -36,9 +36,10 @@ export default function ColumnsConf() {
   }
 
   return (
-    <div>
-      <h1 class="font-semibold mt-4">Edit Columns</h1>
-      <For each={columns.sort((a, b) => a.Sort - b.Sort)}>
+    <div class="text-text2">
+      <h1 class="font-semibold mt-4 mb-1">Edit Columns</h1>
+      <button class="text-btn mb-2" onClick={handleAdd}>New Column</button>
+      <For each={[...columns].sort((a, b) => a.Sort - b.Sort)}>
         {(col) => (
         <div class="flex gap-2">
           <div>
@@ -47,24 +48,24 @@ export default function ColumnsConf() {
               type="number"
               value={col.Sort}
               onInput={(e) => updateSort(col.ID, +e.currentTarget.value)}
-              class="border px-2 py-1 ml-2 w-20"
+              class="my-input px-2 py-1 ml-2 w-20"
             />
           </div>
           <div>
             <label>Name:</label>
             <input
-              type="text"
+              type="text" placeholder="Column Name"
               value={col.Name}
               onInput={(e) => updateName(col.ID, e.currentTarget.value)}
-              class="border px-2 py-1 ml-2"
+              class="my-input py-1 ml-2"
             />
           </div>
-          <div onClick={() => handleDel(col.ID)}><i class="bi bi-x"></i></div>
+          <div onClick={() => handleDel(col.ID)} title="Delete Column">
+            <i class="bi bi-x icon-btn"></i></div>
         </div>
         )}
       </For>
-      <button class="border p-1" onClick={handleAdd}>Add</button>
-      <button class="border p-1" onClick={handleSave}>Save</button>
+      <button class="text-btn mt-2" onClick={handleSave}>Save</button>
     </div>
   )
 }

@@ -19,12 +19,13 @@ export default function ListBoards() {
   }
 
   return (
-    <div class="p-1">
-      <Dropdown label={<i class="bi bi-list" onClick={handleBoards}></i>}
-        class="ml-2 text-gray-500 hover:text-gray-700">
-        <For each={boards()}>
-          {(board) => <div class="dd" onClick={() => handleLoadBoard(board.ID)}>{board.Name}</div>}
-        </For>
+    <div class="p-1 ml-1">
+      <Dropdown label={<i class="bi bi-list icon-btn" title="Boards" onClick={handleBoards}></i>}>
+        <div class="dd-menu-back">
+          <For each={boards()}>
+            {(board) => <div class="dd-menu" onClick={() => handleLoadBoard(board.ID)}>{board.Name}</div>}
+          </For>
+        </div>
       </Dropdown>
     </div>
   )
