@@ -26,11 +26,11 @@
 
 /* Icon button */
 .icon-btn {
-  @apply p-1 px-2 rounded text-text2 hover:bg-text2/20 transition cursor-pointer
+  @apply p-1 px-2 rounded text-text2 hover:bg-text2/30 transition cursor-pointer
 }
 /* Text button */
 .text-btn {
-  @apply p-1 px-2 border rounded text-text1 hover:bg-text1/20 transition cursor-pointer
+  @apply p-1 px-2 border rounded text-text1 hover:bg-text1/30 transition cursor-pointer
 }
 
 /* Input tag */

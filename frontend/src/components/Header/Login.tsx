@@ -52,8 +52,8 @@ export default function Login() {
       onClose={() => setIsOpen(false)}
     ></Modal>
       
-      <button class="ml-2" onClick={() => setIsOpen(true)}>
-          <i class="bi bi-plus-circle-dotted icon-btn"></i>
+      <button class="ml-2 p-1" onClick={() => setIsOpen(true)}>
+          <i class="bi bi-person icon-btn"></i>
       </button>
   </>)
 }
