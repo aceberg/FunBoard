@@ -68,7 +68,7 @@ func Gui(dirPath string) {
 		Index:  "index.html",
 	}))
 
-	app.Get("/board/*", func(c *fiber.Ctx) error {
+	app.Get("/*", func(c *fiber.Ctx) error {
 		data, err := fs.ReadFile(publicFS, "index.html")
 		if err != nil {
 			return c.Status(500).SendString("index.html not found")

@@ -3,6 +3,7 @@ import { curBoard } from "../utils/store"
 import ListBoards from "../components/Header/ListBoards";
 import Login from "../components/Header/Login";
 import { setShowBoardConf, showBoardConf } from "../utils/signals";
+import ConfMenu from "../components/Header/ConfMenu";
 
 function Header() {
 
@@ -17,8 +18,9 @@ function Header() {
         <div class='text-text1 text-lg px-2 p-1'>{curBoard.Name}</div>
         <i class="bi bi-pencil icon-btn" onClick={handleBoardConf} title="Edit Board"></i>
         <AddBoard></AddBoard>
-        <div class="ml-auto">
+        <div class="ml-auto flex">
           <Login></Login>
+          <ConfMenu></ConfMenu>
         </div>
       </div>
     </>
