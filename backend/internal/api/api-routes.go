@@ -24,6 +24,9 @@ func Routes(app *fiber.App, conf *models.Conf) {
 	app.Post("/login", users.Login)
 	app.Get("/logout", users.Logout)
 
+	// themes
+	app.Get("/themes", themesGetAll)
+
 	api := app.Group("/api", users.RequireAuth)
 
 	// config.go

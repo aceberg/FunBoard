@@ -3,6 +3,8 @@ import { Board, Card, Column, ColumnProps } from "./models";
 export const emptyBoard:Board = {
   ID: 0,
   Name: "",
+  Theme: "",
+  CardTheme: "",
   Columns: [],
 }
 

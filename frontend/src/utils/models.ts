@@ -23,6 +23,8 @@ export type Column = {
 export type Board = {
 	ID:   number;
     Name: string;
+    Theme: string;
+    CardTheme: string;
     Columns: Column[];
 };
 

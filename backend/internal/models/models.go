@@ -2,12 +2,13 @@ package models
 
 // Conf - web gui config
 type Conf struct {
-	Host      string `json:"Host"`
-	Port      string `json:"Port"`
-	DirPath   string `json:"DirPath"`
-	ConfPath  string `json:"ConfPath"`
-	UsersPath string `json:"UsersPath"`
-	DBPath    string `json:"DBPath"`
+	Host        string `json:"Host"`
+	Port        string `json:"Port"`
+	DirPath     string `json:"DirPath"`
+	ConfPath    string `json:"ConfPath"`
+	UsersPath   string `json:"UsersPath"`
+	DBPath      string `json:"DBPath"`
+	AuthEnabled bool   `json:"AuthEnabled"`
 }
 
 // User - Board user
@@ -20,9 +21,11 @@ type User struct {
 
 // Board - one board
 type Board struct {
-	ID      uint     `json:"ID" gorm:"primaryKey"`
-	Name    string   `json:"Name"`
-	Columns []Column `json:"Columns" gorm:"foreignKey:BoardID"`
+	ID        uint     `json:"ID" gorm:"primaryKey"`
+	Name      string   `json:"Name"`
+	Theme     string   `json:"Theme"`
+	CardTheme string   `json:"CardTheme"`
+	Columns   []Column `json:"Columns" gorm:"foreignKey:BoardID"`
 }
 
 // BoardInfo - only IDs and Names of Boards
