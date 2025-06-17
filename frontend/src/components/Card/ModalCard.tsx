@@ -1,10 +1,11 @@
 import { createEffect, createSignal, For } from "solid-js";
 import Modal from "../All/Modal";
-import { defaultThemes, getCardClass } from "../../utils/theme-card";
+import { getCardClass } from "../../utils/theme-card";
 import Dropdown from "../All/Dropdown";
 import Subtasks from "./Subtasks";
 import { deleteCard, updateCard } from "../../utils/store";
 import AddSubtask from "./AddSubtask";
+import { curCardTheme } from "../../utils/signals";
 
 export default function ModalCard(_props: any) {
 
@@ -81,8 +82,8 @@ export default function ModalCard(_props: any) {
           </Dropdown>
           <Dropdown label={<><i class="bi bi-paint-bucket pr-2"></i>Color: {cardTheme()}</>} 
             class="border rounded p-1 px-2">
-            <For each={defaultThemes}>
-              {(theme) => <p class="dd" onClick={() => setCardTheme(theme)}>{theme}</p>}
+            <For each={Object.entries(curCardTheme())}>
+              {([key, theme]) => <p class="dd" onClick={() => setCardTheme(key)}>{key}</p>}
             </For>
           </Dropdown>
         </div>

@@ -6,6 +6,7 @@ import { curBoard, setCurBoard } from "../utils/store";
 import { apiBoardGetByID } from "../utils/api";
 import { showBoardConf } from "../utils/signals";
 import { createEffect } from "solid-js";
+import { setupCardTheme } from "../utils/theme-card";
 
 
 export default function Main() {
@@ -27,6 +28,7 @@ function ChangeBoard(_props: any) {
   createEffect(async ()=>{
     setCurBoard(await apiBoardGetByID(_props.id));
     document.title = curBoard.Name + " - FunBoard";
+    setupCardTheme(curBoard.CardTheme);
   }, _props.id);
 
   return (

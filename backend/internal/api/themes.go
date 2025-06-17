@@ -1,6 +1,7 @@
 package api
 
 import (
+	"encoding/json"
 	"os"
 
 	"github.com/aceberg/FunBoard/internal/check"
@@ -33,4 +34,21 @@ func getThemeNames(path string) []string {
 	}
 
 	return names
+}
+
+func themeGetByName(c *fiber.Ctx) error {
+	var data any
+
+	path := c.Params("path")
+	name := c.Params("name")
+
+	if path != "" && name != "" {
+		content, err := os.ReadFile(appConfig.DirPath + "/themes/" + path + "/" + name)
+		check.IfError(err)
+
+		err = json.Unmarshal(content, &data)
+		check.IfError(err)
+	}
+
+	return c.JSON(data)
 }

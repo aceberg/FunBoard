@@ -2,6 +2,7 @@ import { createSignal } from "solid-js";
 import { curBoard, setCurBoard } from "../../../utils/store";
 import { apiBoardEdit } from "../../../utils/api";
 import ColumnsConf from "./ColumnsConf";
+import TableTheme from "./TableTheme";
 
 export default function TableConf() {
 
@@ -20,6 +21,7 @@ export default function TableConf() {
           onInput={(e) => setName(e.currentTarget.value)}></input>
         <button class="text-btn" onClick={saveName}>Save</button>
       </div>
+      <TableTheme></TableTheme>
       <ColumnsConf></ColumnsConf>
     </div>
   )

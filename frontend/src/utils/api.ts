@@ -17,6 +17,15 @@ export const apiLogin = async (username: string, password: string) => {
   return result;
 };
 
+// THEME
+// export const apiThemeGet = async (path: string, name: string) => {
+
+//   const url = apiPath+'/theme/'+path+'/'+name;
+//   const res = await (await fetch(url)).json();
+
+//   return res;
+// };
+
 // BOARD
 export const apiBoardGetByID = async (id:string) => {
 

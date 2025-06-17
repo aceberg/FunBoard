@@ -26,6 +26,7 @@ func Routes(app *fiber.App, conf *models.Conf) {
 
 	// themes
 	app.Get("/themes", themesGetAll)
+	app.Get("/theme/:path/:name", themeGetByName)
 
 	api := app.Group("/api", users.RequireAuth)
 
