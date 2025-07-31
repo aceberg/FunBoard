@@ -8,6 +8,7 @@ type Conf struct {
 	ConfPath    string `json:"ConfPath"`
 	UsersPath   string `json:"UsersPath"`
 	DBPath      string `json:"DBPath"`
+	DBType      string `json:"DBType"`
 	AuthEnabled bool   `json:"AuthEnabled"`
 }
 

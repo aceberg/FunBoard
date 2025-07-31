@@ -1,7 +1,8 @@
 package gdb
 
 import (
-	"gorm.io/driver/sqlite"
+	sqlite "github.com/aceberg/gorm-sqlite"
+
 	"gorm.io/gorm"
 
 	"github.com/aceberg/FunBoard/internal/check"
