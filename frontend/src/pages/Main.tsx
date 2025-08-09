@@ -4,7 +4,7 @@ import Header from "./Header"
 import { useParams } from "@solidjs/router";
 import { curBoard, setCurBoard } from "../utils/store";
 import { apiBoardGetByID } from "../utils/api";
-import { showBoardConf } from "../utils/signals";
+import { setShowBoardConf, showBoardConf } from "../utils/signals";
 import { createEffect } from "solid-js";
 import { setupCardTheme } from "../utils/theme-card";
 
@@ -29,6 +29,7 @@ function ChangeBoard(_props: any) {
     setCurBoard(await apiBoardGetByID(_props.id));
     document.title = curBoard.Name + " - FunBoard";
     setupCardTheme(curBoard.CardTheme);
+    setShowBoardConf(false);
   }, _props.id);
 
   return (

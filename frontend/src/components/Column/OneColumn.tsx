@@ -19,7 +19,7 @@ export default function OneColumn(_props: any) {
   return (
     // flex-1: for equal sise columns
     <div class={fold() ? "h-full w-fit" : "h-full flex-1"}> 
-      <div class="h-full align-top border border-out flex flex-col">
+      <div class="h-full align-top border border-l-0 border-out flex flex-col">
         {fold()
         ? <>
         <div class="border-b border-out text-center p-2 flex-none" onClick={handleFold}>

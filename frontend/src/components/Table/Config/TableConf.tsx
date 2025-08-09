@@ -3,6 +3,7 @@ import { curBoard, setCurBoard } from "../../../utils/store";
 import { apiBoardEdit } from "../../../utils/api";
 import ColumnsConf from "./ColumnsConf";
 import TableTheme from "./TableTheme";
+import DeleteBoard from "./DeleteBoard";
 
 export default function TableConf() {
 
@@ -23,6 +24,7 @@ export default function TableConf() {
       </div>
       <TableTheme></TableTheme>
       <ColumnsConf></ColumnsConf>
+      <DeleteBoard></DeleteBoard>
     </div>
   )
 }

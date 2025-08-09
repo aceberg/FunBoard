@@ -57,6 +57,14 @@ export const apiBoardEdit = async (board: Board) => {
   return result;
 };
 
+export const apiBoardDel = async (id:number) => {
+
+  const url = apiPath+'/api/board/del/'+id;
+  const res = await (await fetch(url)).json();
+
+  return res;
+};
+
 // CARD
 export const apiCardGetByID = async (id:number) => {
 

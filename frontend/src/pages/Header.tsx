@@ -4,6 +4,7 @@ import ListBoards from "../components/Header/ListBoards";
 import Login from "../components/Header/Login";
 import { setShowBoardConf, showBoardConf } from "../utils/signals";
 import ConfMenu from "../components/Header/ConfMenu";
+import GoHome from "../components/Header/GoHome";
 
 function Header() {
 
@@ -19,6 +20,7 @@ function Header() {
         <i class="bi bi-pencil icon-btn" onClick={handleBoardConf} title="Edit Board"></i>
         <AddBoard></AddBoard>
         <div class="ml-auto flex">
+          <GoHome></GoHome>
           <Login></Login>
           <ConfMenu></ConfMenu>
         </div>

@@ -38,7 +38,7 @@ export default function ColumnsConf() {
   return (
     <div class="text-text2">
       <h1 class="font-semibold mt-4 mb-1">Edit Columns</h1>
-      <button class="text-btn mb-2" onClick={handleAdd}>New Column</button>
+      <button class="text-btn mb-2" onClick={handleAdd}>Add</button>
       <For each={[...columns].sort((a, b) => a.Sort - b.Sort)}>
         {(col) => (
         <div class="flex gap-2">

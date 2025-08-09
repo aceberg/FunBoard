@@ -1,7 +1,7 @@
 import { createSignal } from "solid-js";
 import Modal from "../All/Modal";
-import { Board } from "../../utils/models";
 import { apiBoardEdit } from "../../utils/api";
+import { emptyBoard } from "../../utils/empty";
 
 
 export default function AddBoard(_props: any) {
@@ -11,11 +11,9 @@ export default function AddBoard(_props: any) {
   
   const handleAdd = async () => {
     if (boardName() !== "") {
-      const board:Board = {
-        ID: 0,
-        Name: boardName(),
-        Columns: []
-      };
+      let board = emptyBoard;
+      board.ID = 0;
+      board.Name = boardName();
 
       await apiBoardEdit(board);
     }

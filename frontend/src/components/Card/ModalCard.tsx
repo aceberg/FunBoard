@@ -83,7 +83,7 @@ export default function ModalCard(_props: any) {
           <Dropdown label={<><i class="bi bi-paint-bucket pr-2"></i>Color: {cardTheme()}</>} 
             class="border rounded p-1 px-2">
             <For each={Object.entries(curCardTheme())}>
-              {([key, theme]) => <p class="dd" onClick={() => setCardTheme(key)}>{key}</p>}
+              {([key]) => <p class="dd" onClick={() => setCardTheme(key)}>{key}</p>}
             </For>
           </Dropdown>
         </div>

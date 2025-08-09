@@ -6,7 +6,7 @@ function Table() {
 
   return (
     <div class="p-1 flex-1 h-full overflow-x-hidden">
-      <div class="h-full min-w-full border border-out text-text2 flex flex-row">
+      <div class="h-full min-w-full text-text2 flex flex-row border-3 border-out">
         <For each={[...curBoard.Columns].sort((a, b) => a.Sort - b.Sort)}>
           {(col) => <OneColumn col={col}></OneColumn>}
         </For>
